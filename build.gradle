@@ -23,9 +23,7 @@ checkstyle {
 // Run this locally with: ./gradlew testGui
 test {
     useJUnitPlatform()
-    
     exclude '**/GUItests/**'
-    
     jvmArgs = [
             '--add-exports=javafx.graphics/com.sun.javafx.application=ALL-UNNAMED',
             '--add-exports=javafx.graphics/com.sun.glass.ui=ALL-UNNAMED',
@@ -38,8 +36,8 @@ test {
 }
 
 task testGui(type: Test) {
-    group = 'verification'      
-    description = 'Runs GUI tests'  
+    group = 'verification'
+    description = 'Runs GUI tests'
 
     useJUnitPlatform()
     systemProperty 'ci', 'false'
