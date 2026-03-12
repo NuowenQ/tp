@@ -35,6 +35,18 @@ test {
     finalizedBy jacocoTestReport
 }
 
+task testGui(type: Test) {
+    useJUnitPlatform()
+
+    jvmArgs = [
+            '--add-exports=javafx.graphics/com.sun.javafx.application=ALL-UNNAMED',
+            '--add-exports=javafx.graphics/com.sun.glass.ui=ALL-UNNAMED',
+            '--add-opens=javafx.graphics/com.sun.glass.ui=ALL-UNNAMED',
+    ]
+
+    include '**/DeleteCommandGuiTest*'
+}
+
 task coverage(type: JacocoReport) {
     sourceDirectories.from files(sourceSets.main.allSource.srcDirs)
     classDirectories.from files(sourceSets.main.output)
