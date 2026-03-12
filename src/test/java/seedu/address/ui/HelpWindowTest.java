@@ -2,6 +2,7 @@ package seedu.address.ui;
 
 import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
@@ -34,6 +35,21 @@ public class HelpWindowTest {
             latch.countDown();
         }
         latch.await();
+    }
+
+    @Test
+    public void constructor_success() {
+        HelpWindow helpWindow = new HelpWindow(new Stage());
+        assertNotNull(helpWindow.getRoot());
+    }
+
+    @Test
+    public void focus_success() {
+        HelpWindow helpWindow = new HelpWindow(new Stage());
+        helpWindow.show();
+        helpWindow.focus();
+        helpWindow.hide();
+        assertFalse(helpWindow.isShowing());
     }
 
     @Test
