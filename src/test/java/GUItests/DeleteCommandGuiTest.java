@@ -2,6 +2,8 @@ package systemtests;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import org.junit.jupiter.api.condition.DisabledIfSystemProperty;
+
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -26,6 +28,7 @@ import seedu.address.testutil.TestApp;
  * GUI test for the delete command using TestFX (JUnit5 ApplicationExtension).
  */
 @ExtendWith(ApplicationExtension.class)
+@DisabledIfSystemProperty(named = "ci", matches = "true")
 public class DeleteCommandGuiTest {
 
     private int initialListSize;

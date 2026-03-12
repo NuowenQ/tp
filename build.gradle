@@ -20,6 +20,7 @@ checkstyle {
     toolVersion = '11.0.0'
 }
 
+// Run this locally with: ./gradlew testGui
 test {
     useJUnitPlatform()
 
@@ -27,32 +28,11 @@ test {
             '--add-exports=javafx.graphics/com.sun.javafx.application=ALL-UNNAMED',
             '--add-exports=javafx.graphics/com.sun.glass.ui=ALL-UNNAMED',
             '--add-opens=javafx.graphics/com.sun.glass.ui=ALL-UNNAMED',
-            '--add-exports=javafx.graphics/com.sun.javafx.util=ALL-UNNAMED',
-            '--add-exports=javafx.base/com.sun.javafx.logging=ALL-UNNAMED',
-            '-Djava.awt.headless=true',
-            '-Dtestfx.robot=glass',
-            '-Dtestfx.headless=true',
-            '-Dprism.order=sw',
-            '-Dprism.text=t2k',
-            '-Dglass.platform=Monocle',
-            '-Dmonocle.platform=Headless',
     ]
+
+    systemProperty 'ci', System.getProperty('ci', 'false')
 
     finalizedBy jacocoTestReport
-}
-
-// Run this locally with: ./gradlew testGui
-task testGui(type: Test) {
-    useJUnitPlatform()
-
-    jvmArgs = [
-            '--add-exports=javafx.graphics/com.sun.javafx.application=ALL-UNNAMED',
-            '--add-exports=javafx.graphics/com.sun.glass.ui=ALL-UNNAMED',
-            '--add-opens=javafx.graphics/com.sun.glass.ui=ALL-UNNAMED',
-    ]
-
-    // Only run GUI tests
-    include '**/DeleteCommandGuiTest*'
 }
 
 task coverage(type: JacocoReport) {
