@@ -103,4 +103,14 @@ public class PersonTest {
                 + ", address=" + ALICE.getAddress() + ", tags=" + ALICE.getTags() + "}";
         assertEquals(expected, ALICE.toString());
     }
+
+    @Test
+    public void hashCodeTest() {
+        // same values -> returns same hashcode
+        Person aliceCopy = new PersonBuilder(ALICE).build();
+        assertEquals(ALICE.hashCode(), aliceCopy.hashCode());
+
+        // different person -> returns different hashcode
+        assertFalse(ALICE.hashCode() == BOB.hashCode());
+    }
 }
