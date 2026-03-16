@@ -1,14 +1,14 @@
 {
   "persons": [ {
-    "name": "Alice Pauline",
-    "phone": "94351253",
+    "companyName": "Alice Pauline",
+    "role": "Machine Learning Engineer",
     "email": "alice@example.com",
     "website": "www.alice.com",
     "address": "123, Jurong West Ave 6, #08-111",
     "tags": [ "friends" ]
   }, {
-    "name": "Alice Pauline",
-    "phone": "94351253",
+    "companyName": "Alice Pauline",
+    "role": "Machine Learning Engineer",
     "email": "pauline@example.com",
     "website": "www.alice.com",
     "address": "4th street"

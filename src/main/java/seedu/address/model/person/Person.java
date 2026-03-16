@@ -17,8 +17,8 @@ import seedu.address.model.tag.Tag;
 public class Person {
 
     // Identity fields
-    private final Name name;
-    private final Phone phone;
+    private final CompanyName companyName;
+    private final Role role;
     private final Email email;
 
     // Data fields
@@ -29,22 +29,22 @@ public class Person {
     /**
      * Every field must be present and not null.
      */
-    public Person(Name name, Phone phone, Email email, Website website, Address address, Set<Tag> tags) {
-        requireAllNonNull(name, phone, email, website, address, tags);
-        this.name = name;
-        this.phone = phone;
+    public Person(CompanyName companyName, Role role, Email email, Website website, Address address, Set<Tag> tags) {
+        requireAllNonNull(companyName, role, email, website, address, tags);
+        this.companyName = companyName;
+        this.role = role;
         this.email = email;
         this.website = website;
         this.address = address;
         this.tags.addAll(tags);
     }
 
-    public Name getName() {
-        return name;
+    public CompanyName getCompanyName() {
+        return companyName;
     }
 
-    public Phone getPhone() {
-        return phone;
+    public Role getRole() {
+        return role;
     }
 
     public Email getEmail() {
@@ -77,7 +77,7 @@ public class Person {
         }
 
         return otherPerson != null
-                && otherPerson.getName().equals(getName());
+                && otherPerson.getCompanyName().equals(getCompanyName());
     }
 
     /**
@@ -96,8 +96,8 @@ public class Person {
         }
 
         Person otherPerson = (Person) other;
-        return name.equals(otherPerson.name)
-                && phone.equals(otherPerson.phone)
+        return companyName.equals(otherPerson.companyName)
+                && role.equals(otherPerson.role)
                 && email.equals(otherPerson.email)
                 && website.equals(otherPerson.website)
                 && address.equals(otherPerson.address)
@@ -107,14 +107,14 @@ public class Person {
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(name, phone, email, website, address, tags);
+        return Objects.hash(companyName, role, email, website, address, tags);
     }
 
     @Override
     public String toString() {
         return new ToStringBuilder(this)
-                .add("name", name)
-                .add("phone", phone)
+                .add("companyName", companyName)
+                .add("role", role)
                 .add("email", email)
                 .add("website", website)
                 .add("address", address)

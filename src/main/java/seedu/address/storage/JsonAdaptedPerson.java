@@ -11,10 +11,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 import seedu.address.commons.exceptions.IllegalValueException;
 import seedu.address.model.person.Address;
+import seedu.address.model.person.CompanyName;
 import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
+import seedu.address.model.person.Role;
 import seedu.address.model.person.Website;
 import seedu.address.model.tag.Tag;
 
@@ -25,8 +25,8 @@ class JsonAdaptedPerson {
 
     public static final String MISSING_FIELD_MESSAGE_FORMAT = "Person's %s field is missing!";
 
-    private final String name;
-    private final String phone;
+    private final String companyName;
+    private final String role;
     private final String email;
     private final String website;
     private final String address;
@@ -36,12 +36,12 @@ class JsonAdaptedPerson {
      * Constructs a {@code JsonAdaptedPerson} with the given person details.
      */
     @JsonCreator
-    public JsonAdaptedPerson(@JsonProperty("name") String name, @JsonProperty("phone") String phone,
-            @JsonProperty("email") String email, @JsonProperty("website") String website,
+    public JsonAdaptedPerson(@JsonProperty("companyName") String companyName, @JsonProperty("role") String role,
+                             @JsonProperty("email") String email, @JsonProperty("website") String website,
                              @JsonProperty("address") String address,
-            @JsonProperty("tags") List<JsonAdaptedTag> tags) {
-        this.name = name;
-        this.phone = phone;
+                             @JsonProperty("tags") List<JsonAdaptedTag> tags) {
+        this.companyName = companyName;
+        this.role = role;
         this.email = email;
         this.website = website;
         this.address = address;
@@ -54,8 +54,8 @@ class JsonAdaptedPerson {
      * Converts a given {@code Person} into this class for Jackson use.
      */
     public JsonAdaptedPerson(Person source) {
-        name = source.getName().fullName;
-        phone = source.getPhone().value;
+        companyName = source.getCompanyName().fullCompanyName;
+        role = source.getRole().value;
         email = source.getEmail().value;
         website = source.getWebsite().websiteName;
         address = source.getAddress().value;
@@ -75,21 +75,22 @@ class JsonAdaptedPerson {
             personTags.add(tag.toModelType());
         }
 
-        if (name == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Name.class.getSimpleName()));
+        if (companyName == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT,
+                    CompanyName.class.getSimpleName()));
         }
-        if (!Name.isValidName(name)) {
-            throw new IllegalValueException(Name.MESSAGE_CONSTRAINTS);
+        if (!CompanyName.isValidCompanyName(companyName)) {
+            throw new IllegalValueException(CompanyName.MESSAGE_CONSTRAINTS);
         }
-        final Name modelName = new Name(name);
+        final CompanyName modelName = new CompanyName(companyName);
 
-        if (phone == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Phone.class.getSimpleName()));
+        if (role == null) {
+            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Role.class.getSimpleName()));
         }
-        if (!Phone.isValidPhone(phone)) {
-            throw new IllegalValueException(Phone.MESSAGE_CONSTRAINTS);
+        if (!Role.isValidRole(role)) {
+            throw new IllegalValueException(Role.MESSAGE_CONSTRAINTS);
         }
-        final Phone modelPhone = new Phone(phone);
+        final Role modelRole = new Role(role);
 
         if (email == null) {
             throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Email.class.getSimpleName()));
@@ -116,7 +117,7 @@ class JsonAdaptedPerson {
         final Address modelAddress = new Address(address);
 
         final Set<Tag> modelTags = new HashSet<>(personTags);
-        return new Person(modelName, modelPhone, modelEmail, modelWebsite, modelAddress, modelTags);
+        return new Person(modelName, modelRole, modelEmail, modelWebsite, modelAddress, modelTags);
     }
 
 }
