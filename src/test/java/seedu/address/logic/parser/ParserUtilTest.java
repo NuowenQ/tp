@@ -16,6 +16,7 @@ import org.junit.jupiter.api.Test;
 import seedu.address.logic.parser.exceptions.ParseException;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.CompanyName;
+import seedu.address.model.person.Date;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Role;
 import seedu.address.model.person.Website;
@@ -28,6 +29,7 @@ public class ParserUtilTest {
     private static final String INVALID_EMAIL = "example.com";
     private static final String INVALID_TAG = "#friend";
     private static final String INVALID_WEBSITE = "  ";
+    private static final String INVALID_DATE = "2026-02-03";
 
     private static final String VALID_NAME = "Rachel Walker";
     private static final String VALID_ROLE = "Algorithm Engineer";
@@ -36,6 +38,7 @@ public class ParserUtilTest {
     private static final String VALID_TAG_1 = "friend";
     private static final String VALID_TAG_2 = "neighbour";
     private static final String VALID_WEBSITE = "https://rachel.example.com";
+    private static final String VALID_DATE = "02-03-2026";
 
     private static final String WHITESPACE = " \t\r\n";
 
@@ -174,6 +177,28 @@ public class ParserUtilTest {
         assertEquals(expectedWebsite, ParserUtil.parseWebsite(websiteWithWhitespace));
     }
 
+    @Test
+    public void parseDate_null_throwsNullPointerException() {
+        assertThrows(NullPointerException.class, () -> ParserUtil.parseDate(null));
+    }
+
+    @Test
+    public void parseDate_invalidValue_throwsParseException() {
+        assertThrows(ParseException.class, () -> ParserUtil.parseDate(INVALID_DATE));
+    }
+
+    @Test
+    public void parseDate_validValueWithoutWhitespace_returnsDate() throws Exception {
+        Date expectedDate = new Date(VALID_DATE);
+        assertEquals(expectedDate, ParserUtil.parseDate(VALID_DATE));
+    }
+
+    @Test
+    public void parseDate_validValueWithWhitespace_returnsTrimmedDate() throws Exception {
+        String dateWithWhitespace = WHITESPACE + VALID_DATE + WHITESPACE;
+        Date expectedDate = new Date(VALID_DATE);
+        assertEquals(expectedDate, ParserUtil.parseDate(dateWithWhitespace));
+    }
 
     @Test
     public void parseTag_null_throwsNullPointerException() {

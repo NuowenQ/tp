@@ -2,6 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ADDRESS;
+import static seedu.address.logic.parser.CliSyntax.PREFIX_DATE;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_EMAIL;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_NAME;
 import static seedu.address.logic.parser.CliSyntax.PREFIX_ROLE;
@@ -24,6 +25,7 @@ import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.person.Address;
 import seedu.address.model.person.CompanyName;
+import seedu.address.model.person.Date;
 import seedu.address.model.person.Email;
 import seedu.address.model.person.Person;
 import seedu.address.model.person.Role;
@@ -46,6 +48,7 @@ public class EditCommand extends Command {
             + "[" + PREFIX_EMAIL + "EMAIL] "
             + "[" + PREFIX_WEBSITE + "WEBSITE] "
             + "[" + PREFIX_ADDRESS + "ADDRESS] "
+            + "[" + PREFIX_DATE + "DATE]\n"
             + "[" + PREFIX_TAG + "TAG]...\n"
             + "Example: " + COMMAND_WORD + " 1 "
             + PREFIX_ROLE + "Backend Developer Intern "
@@ -103,10 +106,11 @@ public class EditCommand extends Command {
         Email updatedEmail = editPersonDescriptor.getEmail().orElse(personToEdit.getEmail());
         Website updatedWebsite = editPersonDescriptor.getWebsite().orElse(personToEdit.getWebsite());
         Address updatedAddress = editPersonDescriptor.getAddress().orElse(personToEdit.getAddress());
+        Date updatedDate = editPersonDescriptor.getDate().orElse(personToEdit.getDate());
         Set<Tag> updatedTags = editPersonDescriptor.getTags().orElse(personToEdit.getTags());
 
         return new Person(updatedName, updatedRole, updatedEmail,
-                updatedWebsite, updatedAddress, updatedTags);
+                updatedWebsite, updatedAddress, updatedDate, updatedTags);
     }
 
     @Override
@@ -143,6 +147,7 @@ public class EditCommand extends Command {
         private Email email;
         private Website website;
         private Address address;
+        private Date date;
         private Set<Tag> tags;
 
         public EditPersonDescriptor() {}
@@ -157,6 +162,7 @@ public class EditCommand extends Command {
             setEmail(toCopy.email);
             setWebsite(toCopy.website);
             setAddress(toCopy.address);
+            setDate(toCopy.date);
             setTags(toCopy.tags);
         }
 
@@ -164,7 +170,7 @@ public class EditCommand extends Command {
          * Returns true if at least one field is edited.
          */
         public boolean isAnyFieldEdited() {
-            return CollectionUtil.isAnyNonNull(companyName, role, email, website, address, tags);
+            return CollectionUtil.isAnyNonNull(companyName, role, email, website, address, date, tags);
         }
 
         public void setCompanyName(CompanyName name) {
@@ -207,6 +213,14 @@ public class EditCommand extends Command {
             return Optional.ofNullable(address);
         }
 
+        public void setDate(Date date) {
+            this.date = date;
+        }
+
+        public Optional<Date> getDate() {
+            return Optional.ofNullable(date);
+        }
+
         /**
          * Sets {@code tags} to this object's {@code tags}.
          * A defensive copy of {@code tags} is used internally.
@@ -241,6 +255,7 @@ public class EditCommand extends Command {
                     && Objects.equals(email, otherEditPersonDescriptor.email)
                     && Objects.equals(website, otherEditPersonDescriptor.website)
                     && Objects.equals(address, otherEditPersonDescriptor.address)
+                    && Objects.equals(date, otherEditPersonDescriptor.date)
                     && Objects.equals(tags, otherEditPersonDescriptor.tags);
         }
 
@@ -252,6 +267,7 @@ public class EditCommand extends Command {
                     .add("email", email)
                     .add("website", website)
                     .add("address", address)
+                    .add("date", date)
                     .add("tags", tags)
                     .toString();
         }
