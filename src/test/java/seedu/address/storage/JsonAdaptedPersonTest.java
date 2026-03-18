@@ -95,6 +95,14 @@ public class JsonAdaptedPersonTest {
     }
 
     @Test
+    public void toModelType_nullWebsite_throwsIllegalValueException() {
+        JsonAdaptedPerson person = new JsonAdaptedPerson(VALID_COMPANY_NAME, VALID_ROLE, VALID_EMAIL,
+                null, VALID_ADDRESS, VALID_TAGS);
+        String expectedMessage = String.format(MISSING_FIELD_MESSAGE_FORMAT, Website.class.getSimpleName());
+        assertThrows(IllegalValueException.class, expectedMessage, person::toModelType);
+    }
+
+    @Test
     public void toModelType_invalidWebsite_throwsIllegalValueException() {
         JsonAdaptedPerson person =
                 new JsonAdaptedPerson(VALID_COMPANY_NAME, VALID_ROLE, VALID_EMAIL, INVALID_WEBSITE,
