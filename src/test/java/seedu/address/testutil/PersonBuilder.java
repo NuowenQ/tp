@@ -4,10 +4,10 @@ import java.util.HashSet;
 import java.util.Set;
 
 import seedu.address.model.person.Address;
+import seedu.address.model.person.CompanyName;
 import seedu.address.model.person.Email;
-import seedu.address.model.person.Name;
 import seedu.address.model.person.Person;
-import seedu.address.model.person.Phone;
+import seedu.address.model.person.Role;
 import seedu.address.model.person.Website;
 import seedu.address.model.tag.Tag;
 import seedu.address.model.util.SampleDataUtil;
@@ -17,15 +17,15 @@ import seedu.address.model.util.SampleDataUtil;
  */
 public class PersonBuilder {
 
-    public static final String DEFAULT_NAME = "Amy Bee";
-    public static final String DEFAULT_PHONE = "85355255";
+    public static final String DEFAULT_COMPANY_NAME = "Amazon";
+    public static final String DEFAULT_ROLE = "Backend Developer Intern";
     public static final String DEFAULT_EMAIL = "amy@gmail.com";
     public static final String DEFAULT_WEBSITE = "https://example.com";
     public static final String DEFAULT_ADDRESS = "123, Jurong West Ave 6, #08-111";
 
 
-    private Name name;
-    private Phone phone;
+    private CompanyName companyName;
+    private Role role;
     private Email email;
     private Website website;
     private Address address;
@@ -35,8 +35,8 @@ public class PersonBuilder {
      * Creates a {@code PersonBuilder} with the default details.
      */
     public PersonBuilder() {
-        name = new Name(DEFAULT_NAME);
-        phone = new Phone(DEFAULT_PHONE);
+        companyName = new CompanyName(DEFAULT_COMPANY_NAME);
+        role = new Role(DEFAULT_ROLE);
         email = new Email(DEFAULT_EMAIL);
         website = new Website(DEFAULT_WEBSITE);
         address = new Address(DEFAULT_ADDRESS);
@@ -47,8 +47,8 @@ public class PersonBuilder {
      * Initializes the PersonBuilder with the data of {@code personToCopy}.
      */
     public PersonBuilder(Person personToCopy) {
-        name = personToCopy.getName();
-        phone = personToCopy.getPhone();
+        companyName = personToCopy.getCompanyName();
+        role = personToCopy.getRole();
         email = personToCopy.getEmail();
         website = personToCopy.getWebsite();
         address = personToCopy.getAddress();
@@ -59,7 +59,7 @@ public class PersonBuilder {
      * Sets the {@code Name} of the {@code Person} that we are building.
      */
     public PersonBuilder withName(String name) {
-        this.name = new Name(name);
+        this.companyName = new CompanyName(name);
         return this;
     }
 
@@ -80,10 +80,10 @@ public class PersonBuilder {
     }
 
     /**
-     * Sets the {@code Phone} of the {@code Person} that we are building.
+     * Sets the {@code Role} of the {@code Role} that we are building.
      */
-    public PersonBuilder withPhone(String phone) {
-        this.phone = new Phone(phone);
+    public PersonBuilder withRole(String role) {
+        this.role = new Role(role);
         return this;
     }
 
@@ -104,7 +104,7 @@ public class PersonBuilder {
     }
 
     public Person build() {
-        return new Person(name, phone, email, website, address, tags);
+        return new Person(companyName, role, email, website, address, tags);
     }
 
 }
