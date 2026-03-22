@@ -31,7 +31,7 @@ public class SampleDataUtil {
                 new Email("careers@google.com"),
                 new Website("https://careers.google.com"),
                 new Address("70 Pasir Panjang Road, Google Singapore, Singapore 117371"),
-                new Date("02-03-2026"), new Status("Offered"), getTagSet("FANG", "OA")),
+                new Date("02-03-2026"), new Status("Pending"), getTagSet("FANG", "OA")),
             new Application(new CompanyName("Meta"), new Role("Backend Engineer"),
                 new Email("careers@meta.com"),
                 new Website("https://www.metacareers.com"),
