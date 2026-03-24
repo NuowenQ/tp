@@ -50,9 +50,9 @@ public class SummaryCommand extends Command {
 
         String summaryText = "Application Summary\n\n"
                 + "Total Applications: " + total + "\n"
-                + "Pending:            " + pending + "\n"
-                + "Offered:            " + offered + "\n"
-                + "Rejected:           " + rejected + "\n";
+                + "Pending: " + pending + "\n"
+                + "Offered: " + offered + "\n"
+                + "Rejected: " + rejected + "\n";
 
         return new CommandResult(summaryText, false, true, false);
     }
