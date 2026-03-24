@@ -165,18 +165,6 @@ public class MainWindow extends UiPart<Stage> {
         }
     }
 
-    /**
-     * Opens the summary window via menu or F2 shortcut.
-     */
-    @FXML
-    public void handleSummaryMenu() {
-        try {
-            executeCommand("summary");
-        } catch (Exception e) {
-            // should not happen
-        }
-    }
-
     void show() {
         primaryStage.show();
     }
