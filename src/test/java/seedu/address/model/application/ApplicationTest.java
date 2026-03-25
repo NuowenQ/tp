@@ -13,6 +13,7 @@ import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalApplications.ALICE;
 import static seedu.address.testutil.TypicalApplications.BOB;
 import static seedu.address.testutil.TypicalApplications.JETSTAR;
+import static seedu.address.testutil.TypicalApplications.LIHO;
 
 import org.junit.jupiter.api.Test;
 
@@ -119,9 +120,9 @@ public class ApplicationTest {
         String expected = Application.class.getCanonicalName()
                 + "{companyName=" + ALICE.getCompanyName() + ", role=" + ALICE.getRole()
                 + ", website=" + ALICE.getWebsite()
-                + ", address=" + ALICE.getAddress() + ", date=" + ALICE.getDate()
+                + ", date=" + ALICE.getDate()
                 + ", status=" + ALICE.getStatus() + ", tags=" + ALICE.getTags()
-                + ", email=" + ALICE.getEmail() + "}";
+                + ", email=" + ALICE.getEmail() + ", address=" + ALICE.getAddress() + "}";
         assertEquals(expected, ALICE.toString());
     }
 
@@ -130,10 +131,25 @@ public class ApplicationTest {
         String expected = Application.class.getCanonicalName()
                 + "{companyName=" + JETSTAR.getCompanyName() + ", role=" + JETSTAR.getRole()
                 + ", website=" + JETSTAR.getWebsite()
-                + ", address=" + JETSTAR.getAddress() + ", date=" + JETSTAR.getDate()
-                + ", status=" + JETSTAR.getStatus() + ", tags=" + JETSTAR.getTags()
+                + ", date=" + JETSTAR.getDate()
+                + ", status=" + JETSTAR.getStatus()
+                + ", tags=" + JETSTAR.getTags()
+                + ", address=" + JETSTAR.getAddress()
                 + "}";
         assertEquals(expected, JETSTAR.toString());
+    }
+
+    @Test
+    public void toStringMethod_addressAbsent() {
+        String expected = Application.class.getCanonicalName()
+                + "{companyName=" + LIHO.getCompanyName() + ", role=" + LIHO.getRole()
+                + ", website=" + LIHO.getWebsite()
+                + ", date=" + LIHO.getDate()
+                + ", status=" + LIHO.getStatus()
+                + ", tags=" + LIHO.getTags()
+                + ", email=" + LIHO.getEmail()
+                + "}";
+        assertEquals(expected, LIHO.toString());
     }
 
     @Test

@@ -281,13 +281,16 @@ public class EditCommand extends Command {
                     .add("companyName", companyName)
                     .add("role", role)
                     .add("website", website)
-                    .add("address", address)
                     .add("date", date)
                     .add("status", status)
                     .add("tags", tags);
 
             if (email != null) {
                 builder.add("email", email);
+            }
+
+            if (address != null) {
+                builder.add("address", address);
             }
 
             return builder.toString();

@@ -44,10 +44,10 @@ public class Messages {
         appendIfPresent(builder, "Email", application.getEmail());
 
         builder.append("; Website: ")
-                .append(application.getWebsite())
-                .append("; Address: ")
-                .append(application.getAddress())
-                .append("; Date: ")
+                .append(application.getWebsite());
+        appendIfPresent(builder, "; Address: ", application.getAddress());
+
+        builder.append("; Date: ")
                 .append(application.getDate())
                 .append("; Status: ")
                 .append(application.getStatus())

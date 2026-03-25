@@ -40,7 +40,7 @@ public class AddCommandParser implements Parser<AddCommand> {
                 ArgumentTokenizer.tokenize(args, PREFIX_NAME, PREFIX_ROLE, PREFIX_EMAIL,
                         PREFIX_WEBSITE, PREFIX_ADDRESS, PREFIX_DATE, PREFIX_STATUS, PREFIX_TAG);
 
-        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ADDRESS, PREFIX_ROLE,
+        if (!arePrefixesPresent(argMultimap, PREFIX_NAME, PREFIX_ROLE,
                 PREFIX_WEBSITE, PREFIX_DATE, PREFIX_STATUS)
                 || !argMultimap.getPreamble().isEmpty()) {
             throw new ParseException(String.format(MESSAGE_INVALID_COMMAND_FORMAT, AddCommand.MESSAGE_USAGE));
@@ -55,7 +55,10 @@ public class AddCommandParser implements Parser<AddCommand> {
             email = ParserUtil.parseEmail(argMultimap.getValue(PREFIX_EMAIL).get());
         }
         Website website = ParserUtil.parseWebsite(argMultimap.getValue(PREFIX_WEBSITE).get());
-        Address address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
+        Address address = null;
+        if (argMultimap.getValue(PREFIX_ADDRESS).isPresent()) {
+            address = ParserUtil.parseAddress(argMultimap.getValue(PREFIX_ADDRESS).get());
+        }
         Date date = ParserUtil.parseDate(argMultimap.getValue(PREFIX_DATE).get());
         Status status = ParserUtil.parseStatus(argMultimap.getValue(PREFIX_STATUS).get());
         Set<Tag> tagList = ParserUtil.parseTags(argMultimap.getAllValues(PREFIX_TAG));
