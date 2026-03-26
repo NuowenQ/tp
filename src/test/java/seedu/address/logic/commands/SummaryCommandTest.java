@@ -28,7 +28,7 @@ public class SummaryCommandTest {
                 + "Pending: 0\n"
                 + "Offered: 0\n"
                 + "Rejected: 0\n";
-        CommandResult expectedCommandResult = new CommandResult(expectedText, false, true, false);
+        CommandResult expectedCommandResult = new CommandResult(expectedText, UiAction.SHOW_SUMMARY);
 
         assertCommandSuccess(new SummaryCommand(), model, expectedCommandResult, expectedModel);
     }
@@ -68,7 +68,7 @@ public class SummaryCommandTest {
                 + "Pending: " + pending + "\n"
                 + "Offered: " + offered + "\n"
                 + "Rejected: " + rejected + "\n";
-        CommandResult expectedCommandResult = new CommandResult(expectedText, false, true, false);
+        CommandResult expectedCommandResult = new CommandResult(expectedText, UiAction.SHOW_SUMMARY);
 
         assertCommandSuccess(new SummaryCommand(), model, expectedCommandResult, expectedModel);
     }

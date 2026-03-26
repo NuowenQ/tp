@@ -54,6 +54,6 @@ public class SummaryCommand extends Command {
                 + "Offered: " + offered + "\n"
                 + "Rejected: " + rejected + "\n";
 
-        return new CommandResult(summaryText, false, true, false);
+        return new CommandResult(summaryText, UiAction.SHOW_SUMMARY);
     }
 }
