@@ -26,21 +26,28 @@ public class Application {
     private final Address address;
     private final Date date;
     private final Status status;
+    private final String notes;
     private final Set<Tag> tags = new HashSet<>();
 
-    /**
-     * Every field must be present and not null.
-     */
     public Application(CompanyName companyName, Role role, Email email, Website website,
                        Address address, Date date, Status status, Set<Tag> tags) {
-        requireAllNonNull(companyName, role, website, date, status, tags);
+        this(companyName, role, email, website, address, date, status, tags, "");
+    }
+
+    /**
+     * Every field must be present and not null. Notes can be empty.
+     */
+    public Application(CompanyName companyName, Role role, Email email, Website website,
+                       Address address, Date date, Status status, Set<Tag> tags, String notes) {
+        requireAllNonNull(companyName, role, date, status, tags);
         this.companyName = companyName;
         this.role = role;
         this.email = email; //can be null
-        this.website = website;
+        this.website = website; //can be null
         this.address = address; //can be null
         this.date = date;
         this.status = status;
+        this.notes = notes == null ? "" : notes;
         this.tags.addAll(tags);
     }
 
@@ -70,6 +77,10 @@ public class Application {
 
     public Status getStatus() {
         return status;
+    }
+
+    public String getNotes() {
+        return notes;
     }
 
     /**
@@ -113,17 +124,18 @@ public class Application {
         return companyName.equals(otherApplication.companyName)
                 && role.equals(otherApplication.role)
                 && java.util.Objects.equals(email, otherApplication.email)
-                && website.equals(otherApplication.website)
+                && java.util.Objects.equals(website, otherApplication.website)
                 && java.util.Objects.equals(address, otherApplication.address)
                 && date.equals(otherApplication.date)
                 && status.equals(otherApplication.status)
+                && notes.equals(otherApplication.notes)
                 && tags.equals(otherApplication.tags);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(companyName, role, email, website, address, date, status, tags);
+        return Objects.hash(companyName, role, email, website, address, date, status, notes, tags);
     }
 
     @Override
@@ -131,13 +143,15 @@ public class Application {
         ToStringBuilder builder = new ToStringBuilder(this)
                 .add("companyName", companyName)
                 .add("role", role)
-                .add("website", website)
                 .add("date", date)
                 .add("status", status)
                 .add("tags", tags);
 
         if (email != null) {
             builder.add("email", email);
+        }
+        if (website != null) {
+            builder.add("website", website);
         }
 
         if (address != null) {

@@ -34,6 +34,7 @@ class JsonAdaptedApplication {
     private final String date;
     private final String address;
     private final String status;
+    private final String notes;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
@@ -43,7 +44,7 @@ class JsonAdaptedApplication {
     public JsonAdaptedApplication(@JsonProperty("companyName") String companyName, @JsonProperty("role") String role,
                                   @JsonProperty("email") String email, @JsonProperty("website") String website,
                                   @JsonProperty("address") String address, @JsonProperty("date") String date,
-                                  @JsonProperty("status") String status,
+                                  @JsonProperty("status") String status, @JsonProperty("notes") String notes,
                                   @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.companyName = companyName;
         this.role = role;
@@ -52,6 +53,7 @@ class JsonAdaptedApplication {
         this.address = address;
         this.date = date;
         this.status = status;
+        this.notes = notes;
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -64,10 +66,11 @@ class JsonAdaptedApplication {
         companyName = source.getCompanyName().fullCompanyName;
         role = source.getRole().value;
         email = source.getEmail() == null ? null : source.getEmail().value;
-        website = source.getWebsite().websiteName;
+        website = source.getWebsite() == null ? null : source.getWebsite().websiteName;
         address = source.getAddress() == null ? null : source.getAddress().value;
         date = source.getDate().value;
         status = source.getStatus().toString();
+        notes = source.getNotes();
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -111,13 +114,15 @@ class JsonAdaptedApplication {
             modelEmail = new Email(email);
         }
 
+        final Website modelWebsite;
         if (website == null) {
-            throw new IllegalValueException(String.format(MISSING_FIELD_MESSAGE_FORMAT, Website.class.getSimpleName()));
+            modelWebsite = null;
+        } else {
+            if (!Website.isValidWebsite(website)) {
+                throw new IllegalValueException(Website.MESSAGE_CONSTRAINTS);
+            }
+            modelWebsite = new Website(website);
         }
-        if (!Website.isValidWebsite(website)) {
-            throw new IllegalValueException(Website.MESSAGE_CONSTRAINTS);
-        }
-        final Website modelWebsite = new Website(website);
 
         final Address modelAddress;
         if (address == null) {
@@ -146,9 +151,12 @@ class JsonAdaptedApplication {
         }
         final Status modelStatus = new Status(status);
 
+        final String modelNotes = notes == null ? "" : notes;
+
         final Set<Tag> modelTags = new HashSet<>(applicationTags);
         return new Application(
-                modelName, modelRole, modelEmail, modelWebsite, modelAddress, modelDate, modelStatus, modelTags
+                modelName, modelRole, modelEmail, modelWebsite, modelAddress, modelDate, modelStatus,
+                modelTags, modelNotes
         );
     }
 

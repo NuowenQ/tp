@@ -42,10 +42,8 @@ public class Messages {
                 .append(application.getRole());
 
         appendIfPresent(builder, "Email", application.getEmail());
-
-        builder.append("; Website: ")
-                .append(application.getWebsite());
-        appendIfPresent(builder, "; Address: ", application.getAddress());
+        appendIfPresent(builder, "Website", application.getWebsite());
+        appendIfPresent(builder, "Address", application.getWebsite());
 
         builder.append("; Date: ")
                 .append(application.getDate())

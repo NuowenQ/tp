@@ -14,7 +14,7 @@ public class CommandResultTest {
 
         // same values -> returns true
         assertTrue(commandResult.equals(new CommandResult("feedback")));
-        assertTrue(commandResult.equals(new CommandResult("feedback", false, false)));
+        assertTrue(commandResult.equals(new CommandResult("feedback", UiAction.NONE)));
 
         // same object -> returns true
         assertTrue(commandResult.equals(commandResult));
@@ -29,10 +29,13 @@ public class CommandResultTest {
         assertFalse(commandResult.equals(new CommandResult("different")));
 
         // different showHelp value -> returns false
-        assertFalse(commandResult.equals(new CommandResult("feedback", true, false)));
+        assertFalse(commandResult.equals(new CommandResult("feedback", UiAction.SHOW_HELP)));
+
+        // different showSummary value -> returns false
+        assertFalse(commandResult.equals(new CommandResult("feedback", UiAction.SHOW_SUMMARY)));
 
         // different exit value -> returns false
-        assertFalse(commandResult.equals(new CommandResult("feedback", false, true)));
+        assertFalse(commandResult.equals(new CommandResult("feedback", UiAction.EXIT)));
     }
 
     @Test
@@ -46,18 +49,32 @@ public class CommandResultTest {
         assertNotEquals(commandResult.hashCode(), new CommandResult("different").hashCode());
 
         // different showHelp value -> returns different hashcode
-        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", true, false).hashCode());
+        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", UiAction.SHOW_HELP).hashCode());
+
+        // different showSummary value -> returns different hashcode
+        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", UiAction.SHOW_SUMMARY).hashCode());
 
         // different exit value -> returns different hashcode
-        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", false, true).hashCode());
+        assertNotEquals(commandResult.hashCode(), new CommandResult("feedback", UiAction.EXIT).hashCode());
+    }
+
+    @Test
+    public void isShowNote() {
+        assertFalse(new CommandResult("feedback").isShowNote());
+        assertTrue(new CommandResult("feedback", UiAction.SHOW_NOTE).isShowNote());
+    }
+
+    @Test
+    public void isEditNote() {
+        assertFalse(new CommandResult("feedback").isEditNote());
+        assertTrue(new CommandResult("feedback", UiAction.EDIT_NOTE).isEditNote());
     }
 
     @Test
     public void toStringMethod() {
         CommandResult commandResult = new CommandResult("feedback");
         String expected = CommandResult.class.getCanonicalName() + "{feedbackToUser="
-                + commandResult.getFeedbackToUser() + ", showHelp=" + commandResult.isShowHelp()
-                + ", exit=" + commandResult.isExit() + "}";
+                + commandResult.getFeedbackToUser() + ", uiAction=" + commandResult.getUiAction() + "}";
         assertEquals(expected, commandResult.toString());
     }
 }

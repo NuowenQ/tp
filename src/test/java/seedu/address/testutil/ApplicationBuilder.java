@@ -34,6 +34,7 @@ public class ApplicationBuilder {
     private Address address;
     private Date date;
     private Status status;
+    private String notes;
     private Set<Tag> tags;
 
     /**
@@ -47,6 +48,7 @@ public class ApplicationBuilder {
         address = new Address(DEFAULT_ADDRESS);
         date = new Date(DEFAULT_DATE);
         status = new Status(DEFAULT_STATUS);
+        notes = "";
         tags = new HashSet<>();
     }
 
@@ -61,6 +63,7 @@ public class ApplicationBuilder {
         address = applicationToCopy.getAddress();
         date = applicationToCopy.getDate();
         status = applicationToCopy.getStatus();
+        notes = applicationToCopy.getNotes();
         tags = new HashSet<>(applicationToCopy.getTags());
     }
 
@@ -116,7 +119,11 @@ public class ApplicationBuilder {
      * Sets the {@code Website} of the {@code Application} that we are building.
      */
     public ApplicationBuilder withWebsite(String website) {
-        this.website = new Website(website);
+        if (website == null) {
+            this.website = null;
+        } else {
+            this.website = new Website(website);
+        }
         return this;
     }
 
@@ -136,8 +143,16 @@ public class ApplicationBuilder {
         return this;
     }
 
+    /**
+     * Sets the notes of the {@code Application} that we are building.
+     */
+    public ApplicationBuilder withNotes(String notes) {
+        this.notes = notes;
+        return this;
+    }
+
     public Application build() {
-        return new Application(companyName, role, email, website, address, date, status, tags);
+        return new Application(companyName, role, email, website, address, date, status, tags, notes);
     }
 
 }

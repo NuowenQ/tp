@@ -11,6 +11,12 @@ mainClassName = 'seedu.address.Main'
 sourceCompatibility = JavaVersion.VERSION_17
 targetCompatibility = JavaVersion.VERSION_17
 
+//enable assertions
+/*
+run {
+    enableAssertions = true
+}*/
+
 repositories {
     mavenCentral()
     maven { url 'https://oss.sonatype.org/content/repositories/snapshots/' }
@@ -94,6 +100,10 @@ dependencies {
     testImplementation 'org.testfx:testfx-junit5:4.0.16-alpha'
     testImplementation 'org.testfx:testfx-core:4.0.16-alpha'
     testImplementation 'org.testfx:openjfx-monocle:17.0.10'
+}
+
+run {
+    enableAssertions = true
 }
 
 shadowJar {

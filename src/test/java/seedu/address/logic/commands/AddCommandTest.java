@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static seedu.address.testutil.Assert.assertThrows;
 import static seedu.address.testutil.TypicalApplications.ALICE;
 import static seedu.address.testutil.TypicalApplications.JETSTAR;
+import static seedu.address.testutil.TypicalApplications.JETTY;
 
 import java.nio.file.Path;
 import java.util.ArrayList;
@@ -61,6 +62,14 @@ public class AddCommandTest {
         AddCommand command = new AddCommand(JETSTAR);
         CommandResult result = command.execute(modelStub);
         assertFalse(result.getFeedbackToUser().contains("Email:"));
+    }
+
+    @Test
+    public void execute_websiteAbsent_messageOmitsWebsite() throws Exception {
+        ModelStubAcceptingApplicationAdded modelStub = new ModelStubAcceptingApplicationAdded();
+        AddCommand command = new AddCommand(JETTY);
+        CommandResult result = command.execute(modelStub);
+        assertFalse(result.getFeedbackToUser().contains("Website:"));
     }
 
     @Test
@@ -165,6 +174,26 @@ public class AddCommandTest {
 
         @Override
         public void updateFilteredApplicationList(Predicate<Application> predicate) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void editApplicationNotes(Application target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void viewApplicationNotes(Application target) {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public Application getSelectedNotesApplication() {
+            throw new AssertionError("This method should not be called.");
+        }
+
+        @Override
+        public void saveApplicationNotes(String notes) {
             throw new AssertionError("This method should not be called.");
         }
     }
