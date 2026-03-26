@@ -26,23 +26,26 @@ public class Application {
     private final Address address;
     private final Date date;
     private final Status status;
+    private final String notes;
     private final Set<Tag> tags = new HashSet<>();
 
     /**
      * Every field must be present and not null.
      */
     public Application(CompanyName companyName, Role role, Email email, Website website,
-                       Address address, Date date, Status status, Set<Tag> tags) {
-        requireAllNonNull(companyName, role, address, date, status, tags);
-        this.companyName = companyName;
-        this.role = role;
-        this.email = email; //can be null
-        this.website = website; //can be null
-        this.address = address;
-        this.date = date;
-        this.status = status;
-        this.tags.addAll(tags);
-    }
+                   Address address, Date date, Status status, Set<Tag> tags, String notes) {
+    requireAllNonNull(companyName, role, address, date, status, tags);
+
+    this.companyName = companyName;
+    this.role = role;
+    this.email = email;
+    this.website = website;
+    this.address = address;
+    this.date = date;
+    this.status = status;
+    this.tags = tags;
+    this.notes = notes;
+}
 
     public CompanyName getCompanyName() {
         return companyName;
@@ -70,6 +73,10 @@ public class Application {
 
     public Status getStatus() {
         return status;
+    }
+
+    public String getNotes() {
+        return notes;
     }
 
     /**
@@ -117,13 +124,14 @@ public class Application {
                 && address.equals(otherApplication.address)
                 && date.equals(otherApplication.date)
                 && status.equals(otherApplication.status)
+                && notes.equals(otherApplication.notes)
                 && tags.equals(otherApplication.tags);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(companyName, role, email, website, address, date, status, tags);
+        return Objects.hash(companyName, role, email, website, address, date, status, notes, tags);
     }
 
     @Override
