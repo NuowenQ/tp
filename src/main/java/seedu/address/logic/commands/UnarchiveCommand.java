@@ -66,7 +66,6 @@ public class UnarchiveCommand extends Command {
         );
 
         model.setApplication(applicationToUnarchive, unarchivedApplication);
-        model.updateFilteredApplicationList(Model.PREDICATE_SHOW_UNARCHIVED_APPLICATIONS);
 
         return new CommandResult(String.format(MESSAGE_UNARCHIVE_APPLICATION_SUCCESS,
                 Messages.format(unarchivedApplication)));
