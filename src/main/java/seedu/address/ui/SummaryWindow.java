@@ -1,8 +1,12 @@
 package seedu.address.ui;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
@@ -39,7 +43,64 @@ public class SummaryWindow extends UiPart<Stage> {
      * Updates the content displayed in the summary window.
      */
     public void setContent(String content) {
-        summaryMessage.getChildren().setAll(new Text(content));
+        List<Text> nodes = new ArrayList<>();
+        String[] lines = content.split("\n", -1);
+
+        for (int i = 0; i < lines.length; i++) {
+            String line = lines[i];
+
+            if (i == 0) {
+                Text title = new Text(line + "\n");
+                title.setFont(Font.font("Segoe UI Semibold", FontWeight.BOLD, 22));
+                title.setStyle("-fx-fill: white;");
+                nodes.add(title);
+                continue;
+            }
+
+            if (line.trim().isEmpty()) {
+                Text sep = new Text("─────────────────────────\n");
+                sep.setStyle("-fx-fill: #444444; -fx-font-size: 11px;");
+                nodes.add(sep);
+                continue;
+            }
+
+            if (line.contains(": ")) {
+                String[] parts = line.split(": ", 2);
+                String label = parts[0];
+                String value = parts[1];
+
+                Text labelText = new Text(label + ":  ");
+                labelText.setStyle("-fx-fill: #aaaaaa; -fx-font-size: 13px;");
+
+                Text valueText = new Text(value + "\n");
+                valueText.setStyle("-fx-fill: " + getValueColor(label) + "; -fx-font-size: 13px;");
+
+                nodes.add(labelText);
+                nodes.add(valueText);
+            } else {
+                Text plain = new Text(line + "\n");
+                nodes.add(plain);
+            }
+        }
+
+        summaryMessage.getChildren().setAll(nodes);
+    }
+
+    private String getValueColor(String label) {
+        switch (label.trim()) {
+        case "Pending":
+            return "#FFA500";
+        case "Offered":
+            return "#4CAF50";
+        case "Rejected":
+            return "#F44336";
+        case "Success Rate":
+            return "#4CAF50";
+        case "Archived":
+            return "#9E9E9E";
+        default:
+            return "white";
+        }
     }
 
     /**

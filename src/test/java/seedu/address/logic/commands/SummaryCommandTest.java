@@ -27,7 +27,10 @@ public class SummaryCommandTest {
                 + "Total Applications: 0\n"
                 + "Pending: 0\n"
                 + "Offered: 0\n"
-                + "Rejected: 0\n";
+                + "Rejected: 0\n"
+                + "Success Rate: N/A\n"
+                + "\n"
+                + "Archived: 0\n";
         CommandResult expectedCommandResult = new CommandResult(expectedText, UiAction.SHOW_SUMMARY);
 
         assertCommandSuccess(new SummaryCommand(), model, expectedCommandResult, expectedModel);
@@ -42,7 +45,11 @@ public class SummaryCommandTest {
         for (String line : feedback.split("\n")) {
             if (line.contains(": ")) {
                 String value = line.split(": ")[1].trim();
-                assertTrue(Long.parseLong(value) >= 0, "Count should be non-negative: " + line);
+                try {
+                    assertTrue(Long.parseLong(value) >= 0, "Count should be non-negative: " + line);
+                } catch (NumberFormatException e) {
+                    // Non-numeric values like "N/A" or "50.0%" are acceptable
+                }
             }
         }
     }
@@ -52,22 +59,35 @@ public class SummaryCommandTest {
         Model model = new ModelManager(getTypicalAddressBook(), new UserPrefs());
         Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
-        long total = model.getAddressBook().getApplicationList().size();
+        long archived = model.getAddressBook().getApplicationList().stream()
+                .filter(a -> a.getTags().contains(Model.ARCHIVED_TAG))
+                .count();
+        long total = model.getAddressBook().getApplicationList().size() - archived;
         long pending = model.getAddressBook().getApplicationList().stream()
+                .filter(a -> !a.getTags().contains(Model.ARCHIVED_TAG))
                 .filter(a -> a.getStatus().toString().equalsIgnoreCase("Pending"))
                 .count();
         long offered = model.getAddressBook().getApplicationList().stream()
+                .filter(a -> !a.getTags().contains(Model.ARCHIVED_TAG))
                 .filter(a -> a.getStatus().toString().equalsIgnoreCase("Offered"))
                 .count();
         long rejected = model.getAddressBook().getApplicationList().stream()
+                .filter(a -> !a.getTags().contains(Model.ARCHIVED_TAG))
                 .filter(a -> a.getStatus().toString().equalsIgnoreCase("Rejected"))
                 .count();
+
+        String successRate = (offered + rejected) > 0
+                ? String.format("%.1f%%", (offered * 100.0) / (offered + rejected))
+                : "N/A";
 
         String expectedText = "Application Summary\n\n"
                 + "Total Applications: " + total + "\n"
                 + "Pending: " + pending + "\n"
                 + "Offered: " + offered + "\n"
-                + "Rejected: " + rejected + "\n";
+                + "Rejected: " + rejected + "\n"
+                + "Success Rate: " + successRate + "\n"
+                + "\n"
+                + "Archived: " + archived + "\n";
         CommandResult expectedCommandResult = new CommandResult(expectedText, UiAction.SHOW_SUMMARY);
 
         assertCommandSuccess(new SummaryCommand(), model, expectedCommandResult, expectedModel);

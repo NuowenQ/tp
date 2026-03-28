@@ -31,14 +31,20 @@ public class SummaryCommand extends Command {
 
         List<Application> applications = model.getAddressBook().getApplicationList();
 
-        long total = applications.size();
+        long archived = applications.stream()
+                .filter(a -> a.getTags().contains(Model.ARCHIVED_TAG))
+                .count();
+        long total = applications.size() - archived;
         long pending = applications.stream()
+                .filter(a -> !a.getTags().contains(Model.ARCHIVED_TAG))
                 .filter(a -> a.getStatus().toString().equalsIgnoreCase("Pending"))
                 .count();
         long offered = applications.stream()
+                .filter(a -> !a.getTags().contains(Model.ARCHIVED_TAG))
                 .filter(a -> a.getStatus().toString().equalsIgnoreCase("Offered"))
                 .count();
         long rejected = applications.stream()
+                .filter(a -> !a.getTags().contains(Model.ARCHIVED_TAG))
                 .filter(a -> a.getStatus().toString().equalsIgnoreCase("Rejected"))
                 .count();
 
@@ -46,13 +52,21 @@ public class SummaryCommand extends Command {
                 : "Status counts should sum to total: " + pending + "+" + offered + "+" + rejected + " != " + total;
 
         logger.fine("Summary computed: total=" + total
-                + ", pending=" + pending + ", offered=" + offered + ", rejected=" + rejected);
+                + ", pending=" + pending + ", offered=" + offered + ", rejected=" + rejected
+                + ", archived=" + archived);
+
+        String successRate = (offered + rejected) > 0
+                ? String.format("%.1f%%", (offered * 100.0) / (offered + rejected))
+                : "N/A";
 
         String summaryText = "Application Summary\n\n"
                 + "Total Applications: " + total + "\n"
                 + "Pending: " + pending + "\n"
                 + "Offered: " + offered + "\n"
-                + "Rejected: " + rejected + "\n";
+                + "Rejected: " + rejected + "\n"
+                + "Success Rate: " + successRate + "\n"
+                + "\n"
+                + "Archived: " + archived + "\n";
 
         return new CommandResult(summaryText, UiAction.SHOW_SUMMARY);
     }

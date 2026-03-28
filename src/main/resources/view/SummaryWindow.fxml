@@ -14,7 +14,7 @@
     <Image url="@/images/help_icon.png" />
   </icons>
   <scene>
-    <Scene width="400">
+    <Scene width="500">
       <stylesheets>
         <URL value="@SummaryWindow.css" />
       </stylesheets>

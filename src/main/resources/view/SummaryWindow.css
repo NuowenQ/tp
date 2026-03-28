@@ -9,3 +9,55 @@
 #summaryMessageContainer {
     -fx-background-color: derive(#1d1d1d, 20%);
 }
+
+.summary-title {
+    -fx-fill: white;
+    -fx-font-family: "Segoe UI Semibold";
+}
+
+.summary-label {
+    -fx-fill: #aaaaaa;
+    -fx-font-family: "Segoe UI";
+    -fx-font-size: 13px;
+}
+
+.summary-value {
+    -fx-fill: white;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-size: 13px;
+}
+
+.summary-value-pending {
+    -fx-fill: #FFA500;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-size: 13px;
+}
+
+.summary-value-offered {
+    -fx-fill: #4CAF50;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-size: 13px;
+}
+
+.summary-value-rejected {
+    -fx-fill: #F44336;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-size: 13px;
+}
+
+.summary-value-rate {
+    -fx-fill: #29B6F6;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-size: 13px;
+}
+
+.summary-value-archived {
+    -fx-fill: #9E9E9E;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-size: 13px;
+}
+
+.summary-divider {
+    -fx-fill: #444444;
+    -fx-font-size: 11px;
+}
