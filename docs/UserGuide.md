@@ -143,6 +143,17 @@ Examples:
 <br>
 ![find result for 'find t/oa t/fintech'](images/findOaFintech.png)
 
+### Viewing archived applications
+
+Displays all archived applications.
+
+Format: `find t/archived`
+
+* Shows all applications that are currently archived.
+* You can use the `unarchive INDEX` command on this list to restore applications.
+
+Example:
+* `find t/archived`
 
 ### Deleting a application : `delete`
 
@@ -157,6 +168,38 @@ Format: `delete INDEX`
 Examples:
 * `list` followed by `delete 2` deletes the 2nd application in the address book.
 * `find Betsy` followed by `delete 1` deletes the 1st application in the results of the `find` command.
+
+### Archiving an application : `archive`
+
+Archives the specified application so that it is hidden from the main list but still stored in the system.
+
+Format: `archive INDEX`
+
+* Archives the application at the specified `INDEX`.
+* The index refers to the index number shown in the currently displayed application list.
+* Archived applications will not appear in the normal `list` command.
+* Archiving an application does not delete it. The application is tagged as `archived` and hidden from the main list.
+* You can view archived applications using the `find t/archived` command.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `archive 2` archives the 2nd application in the current list.
+* `find Google` followed by `archive 1` archives the 1st application in the search results.
+
+### Unarchiving an application : `unarchive`
+
+Restores an archived application back to the main application list.
+
+Format: `unarchive INDEX`
+
+* The `INDEX` refers to the index number shown in the archived applications list.
+* You must first view archived applications (e.g. using `find t/archived`) before using `unarchive`.
+* The application will be removed from archived status and will appear in the normal list again.
+* The index **must be a positive integer** 1, 2, 3, …​
+
+Examples:
+* `find t/archived`
+* `unarchive 1` restores the 1st archived application.
 
 ### Clearing all entries : `clear`
 
@@ -212,5 +255,7 @@ Action | Format, Examples
 **Delete** | `delete INDEX`<br> e.g., `delete 3`
 **Edit** | `edit INDEX [n/NAME] [p/PHONE_NUMBER] [e/EMAIL] [a/ADDRESS] [t/TAG]…​`<br> e.g.,`edit 2 n/James Lee e/jameslee@example.com`
 **Find** | `find prefix/keyword ...`<br> e.g., `find n/google`
+**Archive** | `archive INDEX`<br> e.g., `archive 2`
+**Unarchive** | `unarchive INDEX`<br> e.g., `unarchive 1`
 **List** | `list`
 **Help** | `help`
