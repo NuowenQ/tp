@@ -55,14 +55,39 @@ public class ApplicationTest {
         editedAlice = new ApplicationBuilder(ALICE).withName(VALID_COMPANY_NAME_BMW).build();
         assertFalse(ALICE.isSameApplication(editedAlice));
 
-        // name differs in case, all other attributes same -> returns false
-        Application editedBob = new ApplicationBuilder(BOB).withName(VALID_COMPANY_NAME_BMW.toLowerCase()).build();
-        assertFalse(BOB.isSameApplication(editedBob));
+        // name differs in case, all other attributes same -> returns true
+        Application editedBob = new ApplicationBuilder(BOB)
+                .withName(VALID_COMPANY_NAME_BMW.toLowerCase()).build();
+        assertTrue(BOB.isSameApplication(editedBob));
 
-        // name has trailing spaces, all other attributes same -> returns false
+        // name has trailing spaces, all other attributes same -> returns true
         String nameWithTrailingSpaces = VALID_COMPANY_NAME_BMW + " ";
-        editedBob = new ApplicationBuilder(BOB).withName(nameWithTrailingSpaces).build();
-        assertFalse(BOB.isSameApplication(editedBob));
+        editedBob = new ApplicationBuilder(BOB)
+                .withName(nameWithTrailingSpaces).build();
+        assertTrue(BOB.isSameApplication(editedBob));
+
+        // name has multiple spaces -> true
+        String nameWithMultipleSpaces = VALID_COMPANY_NAME_BMW.replace(" ", "         ");
+        editedBob = new ApplicationBuilder(BOB)
+                .withName(nameWithMultipleSpaces).build();
+        assertTrue(BOB.isSameApplication(editedBob));
+
+        // role differs in case -> true
+        Application editedRole = new ApplicationBuilder(BOB)
+                .withRole(VALID_ROLE_BACKEND_DEVELOPER.toLowerCase()).build();
+        assertTrue(BOB.isSameApplication(editedRole));
+
+        // role has multiple spaces -> true
+        editedRole = new ApplicationBuilder(BOB)
+                .withRole("Backend     Developer").build();
+        assertTrue(BOB.isSameApplication(editedRole));
+
+        // name and role have multiple spaces -> true
+        Application editedBoth = new ApplicationBuilder(BOB)
+                .withName(nameWithMultipleSpaces)
+                .withRole("Backend     Developer")
+                .build();
+        assertTrue(BOB.isSameApplication(editedBoth));
     }
 
     @Test

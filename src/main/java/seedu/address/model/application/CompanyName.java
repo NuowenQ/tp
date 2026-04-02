@@ -27,17 +27,36 @@ public class CompanyName {
      */
     public CompanyName(String companyName) {
         requireNonNull(companyName);
-        checkArgument(isValidCompanyName(companyName), MESSAGE_CONSTRAINTS);
-        fullCompanyName = companyName;
+        String normalizedCompanyName = normalize(companyName);
+        checkArgument(isValidCompanyName(normalizedCompanyName), MESSAGE_CONSTRAINTS);
+        fullCompanyName = normalizedCompanyName;
+    }
+
+    /**
+     * Normalizes the input string by trimming leading/trailing spaces
+     * and collapsing multiple spaces into one.
+     */
+    private String normalize(String input) {
+        return input.trim().replaceAll("\\s+", " ");
+    }
+
+    /**
+     * Returns true if both company names are the same, ignoring case.
+     * Note: Leading/trailing and multiple spaces are already normalized during construction.
+     */
+    public boolean isSameCompanyName(CompanyName other) {
+        return other != null
+                && this.fullCompanyName
+                .equalsIgnoreCase(other.fullCompanyName);
     }
 
     /**
      * Returns true if a given string is a valid companyName.
      */
     public static boolean isValidCompanyName(String test) {
+        requireNonNull(test);
         return test.matches(VALIDATION_REGEX);
     }
-
 
     @Override
     public String toString() {

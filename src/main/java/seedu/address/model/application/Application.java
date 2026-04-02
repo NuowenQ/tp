@@ -92,8 +92,8 @@ public class Application {
     }
 
     /**
-     * Returns true if both applications have the same name.
-     * This defines a weaker notion of equality between two applications.
+     * Returns true if both applications have the same company name and role, ignoring case.
+     * Note: Leading/trailing and multiple spaces are already normalized in CompanyName and Role.
      */
     public boolean isSameApplication(Application otherApplication) {
         if (otherApplication == this) {
@@ -101,8 +101,8 @@ public class Application {
         }
 
         return otherApplication != null
-                && otherApplication.getCompanyName().equals(getCompanyName())
-                && otherApplication.getRole().equals(getRole());
+                && this.getCompanyName().isSameCompanyName(otherApplication.getCompanyName())
+                && this.getRole().isSameRole(otherApplication.getRole());
     }
 
     /**

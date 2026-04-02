@@ -9,7 +9,6 @@ import static seedu.address.commons.util.AppUtil.checkArgument;
  */
 public class Role {
 
-
     public static final String MESSAGE_CONSTRAINTS =
             "Role should only contain alphanumeric characters and spaces, and it should not be blank";
     public static final String VALIDATION_REGEX = "[\\p{Alnum}][\\p{Alnum} ]*";
@@ -22,14 +21,34 @@ public class Role {
      */
     public Role(String role) {
         requireNonNull(role);
-        checkArgument(isValidRole(role), MESSAGE_CONSTRAINTS);
-        value = role;
+        String normalizedRole = normalize(role);
+        checkArgument(isValidRole(normalizedRole), MESSAGE_CONSTRAINTS);
+        value = normalizedRole;
+    }
+
+    /**
+     * Normalizes the input string by trimming leading/trailing spaces
+     * and collapsing multiple spaces into one.
+     */
+    private String normalize(String input) {
+        return input.trim().replaceAll("\\s+", " ");
+    }
+
+    /**
+     * Returns true if both roles are the same, ignoring case.
+     * Note: Leading/trailing and multiple spaces are already normalized during construction.
+     */
+    public boolean isSameRole(Role other) {
+        return other != null
+                && this.value
+                .equalsIgnoreCase(other.value);
     }
 
     /**
      * Returns true if a given string is a valid role.
      */
     public static boolean isValidRole(String test) {
+        requireNonNull(test);
         return test.matches(VALIDATION_REGEX);
     }
 
