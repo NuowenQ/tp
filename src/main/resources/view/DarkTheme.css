@@ -152,6 +152,15 @@
     -fx-text-fill: #010504;
 }
 
+.archived-label {
+    -fx-background-color: #b3261e;
+    -fx-background-radius: 4;
+    -fx-padding: 4 8 4 8;
+    -fx-text-fill: white;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-font-size: 11px;
+}
+
 .stack-pane {
      -fx-background-color: derive(#1d1d1d, 20%);
 }

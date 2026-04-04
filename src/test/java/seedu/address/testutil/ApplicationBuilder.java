@@ -35,6 +35,7 @@ public class ApplicationBuilder {
     private Date date;
     private Status status;
     private String notes;
+    private boolean isArchived;
     private Set<Tag> tags;
 
     /**
@@ -49,6 +50,7 @@ public class ApplicationBuilder {
         date = new Date(DEFAULT_DATE);
         status = new Status(DEFAULT_STATUS);
         notes = "";
+        isArchived = false;
         tags = new HashSet<>();
     }
 
@@ -64,6 +66,7 @@ public class ApplicationBuilder {
         date = applicationToCopy.getDate();
         status = applicationToCopy.getStatus();
         notes = applicationToCopy.getNotes();
+        isArchived = applicationToCopy.isArchived();
         tags = new HashSet<>(applicationToCopy.getTags());
     }
 
@@ -151,8 +154,16 @@ public class ApplicationBuilder {
         return this;
     }
 
+    /**
+     * Sets whether the {@code Application} that we are building is archived.
+     */
+    public ApplicationBuilder withArchived(boolean isArchived) {
+        this.isArchived = isArchived;
+        return this;
+    }
+
     public Application build() {
-        return new Application(companyName, role, email, website, address, date, status, tags, notes);
+        return new Application(companyName, role, email, website, address, date, status, tags, notes, isArchived);
     }
 
 }

@@ -50,4 +50,20 @@ public class ListCommandTest {
         Model expectedEmptyModel = new ModelManager();
         assertCommandSuccess(new ListCommand(), emptyModel, ListCommand.MESSAGE_SUCCESS_EMPTY_LIST, expectedEmptyModel);
     }
+
+    @Test
+    public void execute_listArchived_showsOnlyArchivedApplications() {
+        model.setApplication(model.getFilteredApplicationList().get(0),
+                new seedu.address.testutil.ApplicationBuilder(model.getFilteredApplicationList().get(0))
+                        .withArchived(true).build());
+        expectedModel.setApplication(expectedModel.getFilteredApplicationList().get(0),
+                new seedu.address.testutil.ApplicationBuilder(expectedModel.getFilteredApplicationList().get(0))
+                        .withArchived(true).build());
+        expectedModel.updateFilteredApplicationList(Model.PREDICATE_SHOW_ARCHIVED_APPLICATIONS);
+
+        assertCommandSuccess(new ListCommand(true),
+                model,
+                String.format(ListCommand.MESSAGE_SUCCESS_ARCHIVED, expectedModel.getFilteredApplicationList().size()),
+                expectedModel);
+    }
 }

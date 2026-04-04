@@ -10,9 +10,6 @@ import static seedu.address.testutil.TypicalApplications.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_APPLICATION;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_APPLICATION;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
@@ -21,7 +18,6 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.application.Application;
-import seedu.address.model.tag.Tag;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -135,9 +131,6 @@ public class ArchiveCommandTest {
     }
 
     private Application getArchivedVersion(Application sourceApplication) {
-        Set<Tag> tags = new HashSet<>(sourceApplication.getTags());
-        tags.add(Model.ARCHIVED_TAG);
-
         return new Application(
                 sourceApplication.getCompanyName(),
                 sourceApplication.getRole(),
@@ -146,8 +139,9 @@ public class ArchiveCommandTest {
                 sourceApplication.getAddress(),
                 sourceApplication.getDate(),
                 sourceApplication.getStatus(),
-                tags,
-                sourceApplication.getNotes()
+                sourceApplication.getTags(),
+                sourceApplication.getNotes(),
+                true
         );
     }
 

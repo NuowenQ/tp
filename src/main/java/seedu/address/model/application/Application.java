@@ -27,11 +27,12 @@ public class Application {
     private final Date date;
     private final Status status;
     private final String notes;
+    private final boolean isArchived;
     private final Set<Tag> tags = new HashSet<>();
 
     public Application(CompanyName companyName, Role role, Email email, Website website,
                        Address address, Date date, Status status, Set<Tag> tags) {
-        this(companyName, role, email, website, address, date, status, tags, "");
+        this(companyName, role, email, website, address, date, status, tags, "", false);
     }
 
     /**
@@ -39,6 +40,22 @@ public class Application {
      */
     public Application(CompanyName companyName, Role role, Email email, Website website,
                        Address address, Date date, Status status, Set<Tag> tags, String notes) {
+        this(companyName, role, email, website, address, date, status, tags, notes, false);
+    }
+
+    /**
+     * Every field must be present and not null.
+     */
+    public Application(CompanyName companyName, Role role, Email email, Website website,
+                       Address address, Date date, Status status, Set<Tag> tags, boolean isArchived) {
+        this(companyName, role, email, website, address, date, status, tags, "", isArchived);
+    }
+
+    /**
+     * Every field must be present and not null. Notes can be empty.
+     */
+    public Application(CompanyName companyName, Role role, Email email, Website website,
+                       Address address, Date date, Status status, Set<Tag> tags, String notes, boolean isArchived) {
         requireAllNonNull(companyName, role, date, status, tags);
         this.companyName = companyName;
         this.role = role;
@@ -48,6 +65,7 @@ public class Application {
         this.date = date;
         this.status = status;
         this.notes = notes == null ? "" : notes;
+        this.isArchived = isArchived;
         this.tags.addAll(tags);
     }
 
@@ -81,6 +99,10 @@ public class Application {
 
     public String getNotes() {
         return notes;
+    }
+
+    public boolean isArchived() {
+        return isArchived;
     }
 
     /**
@@ -129,13 +151,14 @@ public class Application {
                 && date.equals(otherApplication.date)
                 && status.equals(otherApplication.status)
                 && notes.equals(otherApplication.notes)
+                && isArchived == otherApplication.isArchived
                 && tags.equals(otherApplication.tags);
     }
 
     @Override
     public int hashCode() {
         // use this method for custom fields hashing instead of implementing your own
-        return Objects.hash(companyName, role, email, website, address, date, status, notes, tags);
+        return Objects.hash(companyName, role, email, website, address, date, status, notes, isArchived, tags);
     }
 
     @Override
@@ -145,6 +168,7 @@ public class Application {
                 .add("role", role)
                 .add("date", date)
                 .add("status", status)
+                .add("isArchived", isArchived)
                 .add("tags", tags);
 
         if (email != null) {

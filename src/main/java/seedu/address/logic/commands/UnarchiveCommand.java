@@ -2,9 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
@@ -12,7 +10,6 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.application.Application;
-import seedu.address.model.tag.Tag;
 
 /**
  * Unarchives an application identified using its displayed index from the application list.
@@ -46,12 +43,9 @@ public class UnarchiveCommand extends Command {
 
         Application applicationToUnarchive = lastShownList.get(targetIndex.getZeroBased());
 
-        if (!applicationToUnarchive.getTags().contains(Model.ARCHIVED_TAG)) {
+        if (!applicationToUnarchive.isArchived()) {
             return new CommandResult(MESSAGE_APPLICATION_NOT_ARCHIVED);
         }
-
-        Set<Tag> unarchivedTags = new HashSet<>(applicationToUnarchive.getTags());
-        unarchivedTags.remove(Model.ARCHIVED_TAG);
 
         Application unarchivedApplication = new Application(
                 applicationToUnarchive.getCompanyName(),
@@ -61,11 +55,13 @@ public class UnarchiveCommand extends Command {
                 applicationToUnarchive.getAddress(),
                 applicationToUnarchive.getDate(),
                 applicationToUnarchive.getStatus(),
-                unarchivedTags,
-                applicationToUnarchive.getNotes()
+                applicationToUnarchive.getTags(),
+                applicationToUnarchive.getNotes(),
+                false
         );
 
         model.setApplication(applicationToUnarchive, unarchivedApplication);
+        model.updateFilteredApplicationList(model.getFilteredApplicationListPredicate());
 
         return new CommandResult(String.format(MESSAGE_UNARCHIVE_APPLICATION_SUCCESS,
                 Messages.format(unarchivedApplication)));

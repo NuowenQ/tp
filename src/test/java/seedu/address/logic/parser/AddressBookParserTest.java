@@ -142,8 +142,8 @@ public class AddressBookParserTest {
 
     @Test
     public void parseCommand_list() throws Exception {
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD) instanceof ListCommand);
-        assertTrue(parser.parseCommand(ListCommand.COMMAND_WORD + " 3") instanceof ListCommand);
+        assertEquals(new ListCommand(), parser.parseCommand(ListCommand.COMMAND_WORD));
+        assertEquals(new ListCommand(true), parser.parseCommand(ListCommand.COMMAND_WORD + " archived"));
     }
 
     @Test

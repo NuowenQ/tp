@@ -84,6 +84,7 @@ public class ModelManagerNotesTest {
         assertEquals(target.getDate(), updated.getDate());
         assertEquals(target.getStatus(), updated.getStatus());
         assertEquals(target.getTags(), updated.getTags());
+        assertEquals(target.isArchived(), updated.isArchived());
     }
 
     @Test
@@ -109,7 +110,8 @@ public class ModelManagerNotesTest {
                 new seedu.address.model.application.Date("01-01-2026"),
                 new seedu.address.model.application.Status("Pending"),
                 new java.util.HashSet<>(),
-                null
+                null,
+                false
         );
         assertEquals("", app.getNotes());
     }

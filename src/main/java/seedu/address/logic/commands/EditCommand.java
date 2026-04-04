@@ -128,7 +128,8 @@ public class EditCommand extends Command {
         }
 
         return new Application(updatedName, updatedRole, updatedEmail,
-                updatedWebsite, updatedAddress, updatedDate, updatedStatus, updatedTags);
+                updatedWebsite, updatedAddress, updatedDate, updatedStatus, updatedTags,
+                applicationToEdit.getNotes(), applicationToEdit.isArchived());
     }
 
     @Override

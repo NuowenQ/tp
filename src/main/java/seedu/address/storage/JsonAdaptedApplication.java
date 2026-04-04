@@ -35,6 +35,7 @@ class JsonAdaptedApplication {
     private final String address;
     private final String status;
     private final String notes;
+    private final Boolean isArchived;
     private final List<JsonAdaptedTag> tags = new ArrayList<>();
 
     /**
@@ -45,6 +46,7 @@ class JsonAdaptedApplication {
                                   @JsonProperty("email") String email, @JsonProperty("website") String website,
                                   @JsonProperty("address") String address, @JsonProperty("date") String date,
                                   @JsonProperty("status") String status, @JsonProperty("notes") String notes,
+                                  @JsonProperty("isArchived") Boolean isArchived,
                                   @JsonProperty("tags") List<JsonAdaptedTag> tags) {
         this.companyName = companyName;
         this.role = role;
@@ -54,6 +56,7 @@ class JsonAdaptedApplication {
         this.date = date;
         this.status = status;
         this.notes = notes;
+        this.isArchived = isArchived;
         if (tags != null) {
             this.tags.addAll(tags);
         }
@@ -71,6 +74,7 @@ class JsonAdaptedApplication {
         date = source.getDate().value;
         status = source.getStatus().toString();
         notes = source.getNotes();
+        isArchived = source.isArchived();
         tags.addAll(source.getTags().stream()
                 .map(JsonAdaptedTag::new)
                 .collect(Collectors.toList()));
@@ -152,11 +156,12 @@ class JsonAdaptedApplication {
         final Status modelStatus = new Status(status);
 
         final String modelNotes = notes == null ? "" : notes;
+        final boolean modelIsArchived = isArchived != null && isArchived;
 
         final Set<Tag> modelTags = new HashSet<>(applicationTags);
         return new Application(
                 modelName, modelRole, modelEmail, modelWebsite, modelAddress, modelDate, modelStatus,
-                modelTags, modelNotes
+                modelTags, modelNotes, modelIsArchived
         );
     }
 

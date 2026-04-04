@@ -139,6 +139,10 @@ public class ApplicationTest {
         // different tags -> returns false
         editedAlice = new ApplicationBuilder(ALICE).withTags(VALID_TAG_HUSBAND).build();
         assertFalse(ALICE.equals(editedAlice));
+
+        // different archived state -> returns false
+        editedAlice = new ApplicationBuilder(ALICE).withArchived(true).build();
+        assertFalse(ALICE.equals(editedAlice));
     }
 
     @Test
@@ -146,7 +150,8 @@ public class ApplicationTest {
         String expected = Application.class.getCanonicalName()
                 + "{companyName=" + ALICE.getCompanyName() + ", role=" + ALICE.getRole()
                 + ", date=" + ALICE.getDate()
-                + ", status=" + ALICE.getStatus() + ", tags=" + ALICE.getTags()
+                + ", status=" + ALICE.getStatus() + ", isArchived=" + ALICE.isArchived()
+                + ", tags=" + ALICE.getTags()
                 + ", email=" + ALICE.getEmail() + ", website=" + ALICE.getWebsite()
                 + ", address=" + ALICE.getAddress() + "}";
         assertEquals(expected, ALICE.toString());
@@ -157,7 +162,7 @@ public class ApplicationTest {
         String expected = Application.class.getCanonicalName()
                 + "{companyName=" + JETSTAR.getCompanyName() + ", role=" + JETSTAR.getRole()
                 + ", date=" + JETSTAR.getDate()
-                + ", status=" + JETSTAR.getStatus()
+                + ", status=" + JETSTAR.getStatus() + ", isArchived=" + JETSTAR.isArchived()
                 + ", tags=" + JETSTAR.getTags()
                 + ", website=" + JETSTAR.getWebsite()
                 + ", address=" + JETSTAR.getAddress()
@@ -170,7 +175,8 @@ public class ApplicationTest {
         String expected = Application.class.getCanonicalName()
                 + "{companyName=" + JETTY.getCompanyName() + ", role=" + JETTY.getRole()
                 + ", date=" + JETTY.getDate()
-                + ", status=" + JETTY.getStatus() + ", tags=" + JETTY.getTags()
+                + ", status=" + JETTY.getStatus() + ", isArchived=" + JETTY.isArchived()
+                + ", tags=" + JETTY.getTags()
                 + ", email=" + JETTY.getEmail() + ", address=" + JETTY.getAddress() + "}";
         assertEquals(expected, JETTY.toString());
     }
@@ -180,7 +186,7 @@ public class ApplicationTest {
         String expected = Application.class.getCanonicalName()
                 + "{companyName=" + LIHO.getCompanyName() + ", role=" + LIHO.getRole()
                 + ", date=" + LIHO.getDate()
-                + ", status=" + LIHO.getStatus()
+                + ", status=" + LIHO.getStatus() + ", isArchived=" + LIHO.isArchived()
                 + ", tags=" + LIHO.getTags()
                 + ", email=" + LIHO.getEmail()
                 + ", website=" + LIHO.getWebsite()

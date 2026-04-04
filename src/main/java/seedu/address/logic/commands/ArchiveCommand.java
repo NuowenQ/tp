@@ -2,9 +2,7 @@ package seedu.address.logic.commands;
 
 import static java.util.Objects.requireNonNull;
 
-import java.util.HashSet;
 import java.util.List;
-import java.util.Set;
 
 import seedu.address.commons.core.index.Index;
 import seedu.address.commons.util.ToStringBuilder;
@@ -12,7 +10,6 @@ import seedu.address.logic.Messages;
 import seedu.address.logic.commands.exceptions.CommandException;
 import seedu.address.model.Model;
 import seedu.address.model.application.Application;
-import seedu.address.model.tag.Tag;
 
 /**
  * Archives an application identified using its displayed index from the application list.
@@ -46,12 +43,9 @@ public class ArchiveCommand extends Command {
 
         Application applicationToArchive = lastShownList.get(targetIndex.getZeroBased());
 
-        if (applicationToArchive.getTags().contains(Model.ARCHIVED_TAG)) {
+        if (applicationToArchive.isArchived()) {
             return new CommandResult(MESSAGE_APPLICATION_ALREADY_ARCHIVED);
         }
-
-        Set<Tag> archivedTags = new HashSet<>(applicationToArchive.getTags());
-        archivedTags.add(Model.ARCHIVED_TAG);
 
         Application archivedApplication = new Application(
                 applicationToArchive.getCompanyName(),
@@ -61,8 +55,9 @@ public class ArchiveCommand extends Command {
                 applicationToArchive.getAddress(),
                 applicationToArchive.getDate(),
                 applicationToArchive.getStatus(),
-                archivedTags,
-                applicationToArchive.getNotes()
+                applicationToArchive.getTags(),
+                applicationToArchive.getNotes(),
+                true
         );
 
         model.setApplication(applicationToArchive, archivedApplication);

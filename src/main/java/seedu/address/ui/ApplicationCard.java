@@ -46,6 +46,8 @@ public class ApplicationCard extends UiPart<Region> {
     private Label status;
     @FXML
     private FlowPane tags;
+    @FXML
+    private Label archivedLabel;
 
     /**
      * Creates a {@code ApplicationCode} with the given {@code Application} and index to display.
@@ -61,6 +63,8 @@ public class ApplicationCard extends UiPart<Region> {
         website.setText(application.getWebsite() == null ? "" : application.getWebsite().websiteName);
         date.setText(application.getDate().value);
         status.setText(application.getStatus().toString());
+        archivedLabel.setVisible(application.isArchived());
+        archivedLabel.setManaged(application.isArchived());
         application.getTags().stream()
                 .sorted(Comparator.comparing(tag -> tag.tagName))
                 .forEach(tag -> tags.getChildren().add(new Label(tag.tagName)));

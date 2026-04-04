@@ -62,19 +62,19 @@ public class SummaryCommandTest {
         Model expectedModel = new ModelManager(getTypicalAddressBook(), new UserPrefs());
 
         long archived = model.getAddressBook().getApplicationList().stream()
-                .filter(a -> a.getTags().contains(Model.ARCHIVED_TAG))
+                .filter(a -> a.isArchived())
                 .count();
         long total = model.getAddressBook().getApplicationList().size() - archived;
         long pending = model.getAddressBook().getApplicationList().stream()
-                .filter(a -> !a.getTags().contains(Model.ARCHIVED_TAG))
+                .filter(a -> !a.isArchived())
                 .filter(a -> a.getStatus().toString().equalsIgnoreCase("Pending"))
                 .count();
         long offered = model.getAddressBook().getApplicationList().stream()
-                .filter(a -> !a.getTags().contains(Model.ARCHIVED_TAG))
+                .filter(a -> !a.isArchived())
                 .filter(a -> a.getStatus().toString().equalsIgnoreCase("Offered"))
                 .count();
         long rejected = model.getAddressBook().getApplicationList().stream()
-                .filter(a -> !a.getTags().contains(Model.ARCHIVED_TAG))
+                .filter(a -> !a.isArchived())
                 .filter(a -> a.getStatus().toString().equalsIgnoreCase("Rejected"))
                 .count();
 
@@ -100,7 +100,7 @@ public class SummaryCommandTest {
         AddressBook ab = new AddressBook();
         ab.addApplication(new ApplicationBuilder().withName("Active Co").withStatus("Offered").build());
         ab.addApplication(new ApplicationBuilder().withName("Archived Co").withStatus("Rejected")
-                .withTags("archived").build());
+                .withArchived(true).build());
 
         Model model = new ModelManager(ab, new UserPrefs());
         Model expectedModel = new ModelManager(ab, new UserPrefs());

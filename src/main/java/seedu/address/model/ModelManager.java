@@ -145,7 +145,8 @@ public class ModelManager implements Model {
                 selectedNotesApplication.getDate(),
                 selectedNotesApplication.getStatus(),
                 selectedNotesApplication.getTags(),
-                notes
+                notes,
+                selectedNotesApplication.isArchived()
         );
         addressBook.setApplication(selectedNotesApplication, updatedApplication);
         selectedNotesApplication = updatedApplication;

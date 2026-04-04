@@ -8,9 +8,6 @@ import static seedu.address.testutil.TypicalApplications.getTypicalAddressBook;
 import static seedu.address.testutil.TypicalIndexes.INDEX_FIRST_APPLICATION;
 import static seedu.address.testutil.TypicalIndexes.INDEX_SECOND_APPLICATION;
 
-import java.util.HashSet;
-import java.util.Set;
-
 import org.junit.jupiter.api.Test;
 
 import seedu.address.commons.core.index.Index;
@@ -19,7 +16,6 @@ import seedu.address.model.Model;
 import seedu.address.model.ModelManager;
 import seedu.address.model.UserPrefs;
 import seedu.address.model.application.Application;
-import seedu.address.model.tag.Tag;
 
 /**
  * Contains integration tests (interaction with the Model) and unit tests for
@@ -37,7 +33,7 @@ public class UnarchiveCommandTest {
         Application archivedApplication = getArchivedVersion(applicationToArchive);
         model.setApplication(applicationToArchive, archivedApplication);
 
-        model.updateFilteredApplicationList(application -> application.getTags().contains(Model.ARCHIVED_TAG));
+        model.updateFilteredApplicationList(Model.PREDICATE_SHOW_ARCHIVED_APPLICATIONS);
 
         UnarchiveCommand unarchiveCommand = new UnarchiveCommand(INDEX_FIRST_APPLICATION);
 
@@ -46,11 +42,11 @@ public class UnarchiveCommandTest {
                 Messages.format(expectedUnarchivedApplication));
 
         Model expectedModel = new ModelManager(model.getAddressBook(), model.getUserPrefs());
-        expectedModel.updateFilteredApplicationList(expectedApplication -> expectedApplication.getTags()
-                .contains(Model.ARCHIVED_TAG));
+        expectedModel.updateFilteredApplicationList(Model.PREDICATE_SHOW_ARCHIVED_APPLICATIONS);
         Application expectedApplicationToUnarchive = expectedModel.getFilteredApplicationList()
                 .get(INDEX_FIRST_APPLICATION.getZeroBased());
         expectedModel.setApplication(expectedApplicationToUnarchive, expectedUnarchivedApplication);
+        expectedModel.updateFilteredApplicationList(Model.PREDICATE_SHOW_ARCHIVED_APPLICATIONS);
 
         assertCommandSuccess(unarchiveCommand, model, expectedMessage, expectedModel);
     }
@@ -63,8 +59,7 @@ public class UnarchiveCommandTest {
         Application archivedApplication = getArchivedVersion(applicationToArchive);
         model.setApplication(applicationToArchive, archivedApplication);
 
-        model.updateFilteredApplicationList(application -> application
-                .getTags().contains(Model.ARCHIVED_TAG));
+        model.updateFilteredApplicationList(Model.PREDICATE_SHOW_ARCHIVED_APPLICATIONS);
 
         Index outOfBoundIndex = INDEX_SECOND_APPLICATION;
         assertTrue(outOfBoundIndex.getZeroBased() < model.getAddressBook().getApplicationList().size());
@@ -101,9 +96,6 @@ public class UnarchiveCommandTest {
     }
 
     private Application getArchivedVersion(Application sourceApplication) {
-        Set<Tag> tags = new HashSet<>(sourceApplication.getTags());
-        tags.add(Model.ARCHIVED_TAG);
-
         return new Application(
                 sourceApplication.getCompanyName(),
                 sourceApplication.getRole(),
@@ -112,15 +104,13 @@ public class UnarchiveCommandTest {
                 sourceApplication.getAddress(),
                 sourceApplication.getDate(),
                 sourceApplication.getStatus(),
-                tags,
-                sourceApplication.getNotes()
+                sourceApplication.getTags(),
+                sourceApplication.getNotes(),
+                true
         );
     }
 
     private Application getUnarchivedVersion(Application sourceApplication) {
-        Set<Tag> tags = new HashSet<>(sourceApplication.getTags());
-        tags.remove(Model.ARCHIVED_TAG);
-
         return new Application(
                 sourceApplication.getCompanyName(),
                 sourceApplication.getRole(),
@@ -129,8 +119,9 @@ public class UnarchiveCommandTest {
                 sourceApplication.getAddress(),
                 sourceApplication.getDate(),
                 sourceApplication.getStatus(),
-                tags,
-                sourceApplication.getNotes()
+                sourceApplication.getTags(),
+                sourceApplication.getNotes(),
+                false
         );
     }
 }

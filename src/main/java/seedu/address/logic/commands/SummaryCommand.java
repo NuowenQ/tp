@@ -32,19 +32,19 @@ public class SummaryCommand extends Command {
         List<Application> applications = model.getAddressBook().getApplicationList();
 
         long archived = applications.stream()
-                .filter(a -> a.getTags().contains(Model.ARCHIVED_TAG))
+                .filter(Application::isArchived)
                 .count();
         long total = applications.size() - archived;
         long pending = applications.stream()
-                .filter(a -> !a.getTags().contains(Model.ARCHIVED_TAG))
+                .filter(a -> !a.isArchived())
                 .filter(a -> a.getStatus().toString().equalsIgnoreCase("Pending"))
                 .count();
         long offered = applications.stream()
-                .filter(a -> !a.getTags().contains(Model.ARCHIVED_TAG))
+                .filter(a -> !a.isArchived())
                 .filter(a -> a.getStatus().toString().equalsIgnoreCase("Offered"))
                 .count();
         long rejected = applications.stream()
-                .filter(a -> !a.getTags().contains(Model.ARCHIVED_TAG))
+                .filter(a -> !a.isArchived())
                 .filter(a -> a.getStatus().toString().equalsIgnoreCase("Rejected"))
                 .count();
 
