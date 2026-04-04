@@ -3,6 +3,7 @@ package seedu.address.ui;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
@@ -58,6 +59,9 @@ public class HelpWindow extends UiPart<Stage> {
     @FXML
     private TextFlow helpMessage;
 
+    @FXML
+    private ScrollPane scrollPane;
+
     /**
      * Creates a new HelpWindow.
      *
@@ -65,7 +69,9 @@ public class HelpWindow extends UiPart<Stage> {
      */
     public HelpWindow(Stage root) {
         super(FXML, root);
-        helpMessage.getChildren().setAll(new Text(HELP_MESSAGE));
+        root.setResizable(true);
+        root.setMinWidth(500);
+        root.setMinHeight(400);
     }
 
     /**
@@ -74,6 +80,23 @@ public class HelpWindow extends UiPart<Stage> {
     public HelpWindow() {
         this(new Stage());
     }
+
+    /**
+     * Initializes the UI components of the help window.
+     * This method is automatically called after FXML loading,
+     * when all @FXML fields have been injected.
+     */
+    @FXML
+    public void initialize() {
+        Text text = new Text(HELP_MESSAGE);
+
+        text.wrappingWidthProperty().bind(scrollPane.widthProperty().subtract(30));
+
+        helpMessage.getChildren().setAll(text);
+    }
+
+
+
 
     /**
      * Shows the help window.
