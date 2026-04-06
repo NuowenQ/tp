@@ -9,7 +9,7 @@
 <?import javafx.scene.text.TextFlow?>
 <?import javafx.scene.layout.VBox?>
 
-<fx:root resizable="false" title="Help" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root title="Help" type="javafx.stage.Stage" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1">
   <icons>
     <Image url="@/images/help_icon.png" />
   </icons>
@@ -19,7 +19,7 @@
         <URL value="@HelpWindow.css" />
       </stylesheets>
 
-      <ScrollPane fitToWidth="true" pannable="true" hbarPolicy="NEVER">
+      <ScrollPane fx:id="scrollPane" fitToWidth="true" pannable="true" hbarPolicy="NEVER">
         <content>
             <VBox alignment="CENTER" fx:id="helpMessageContainer" spacing="10">
             <children>

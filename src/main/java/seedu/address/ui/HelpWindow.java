@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
@@ -14,6 +15,7 @@ import seedu.address.commons.core.LogsCenter;
  * Controller for a help page
  */
 public class HelpWindow extends UiPart<Stage> {
+
 
     public static final String HELP_MESSAGE = """
             HireME – Command Help
@@ -70,9 +72,17 @@ public class HelpWindow extends UiPart<Stage> {
 
     private static final Logger logger = LogsCenter.getLogger(HelpWindow.class);
     private static final String FXML = "HelpWindow.fxml";
+    private static final String PRIMARY = "#4FC3F7"; // accent blue
+    private static final String TEXT = "#E6E6E6"; // main text
+    private static final String SUBTLE = "#A0A0A0"; // secondary text
+    private static final String MUTED = "#6B6B6B"; // notes
+    private static final String CODE_BG = "#2A2A2A"; // code background
 
     @FXML
     private TextFlow helpMessage;
+
+    @FXML
+    private ScrollPane scrollPane;
 
     /**
      * Creates a new HelpWindow.
@@ -81,7 +91,9 @@ public class HelpWindow extends UiPart<Stage> {
      */
     public HelpWindow(Stage root) {
         super(FXML, root);
-        //helpMessage.getChildren().setAll(new Text(HELP_MESSAGE));
+        root.setResizable(true);
+        root.setMinWidth(500);
+        root.setMinHeight(400);
     }
 
     /**
@@ -91,10 +103,17 @@ public class HelpWindow extends UiPart<Stage> {
         this(new Stage());
     }
 
+    /**
+     * Initializes the UI components of the help window.
+     * This method is automatically called after FXML loading,
+     * when all @FXML fields have been injected.
+     */
     @FXML
     public void initialize() {
-        helpMessage.getChildren().clear();
+        Text text = new Text(HELP_MESSAGE);
 
+        text.wrappingWidthProperty().bind(scrollPane.widthProperty().subtract(30));
+        helpMessage.getChildren().clear();
         helpMessage.getChildren().addAll(
                 title(),
                 body("Track your internship applications using the commands below.\n\n")
@@ -188,7 +207,7 @@ public class HelpWindow extends UiPart<Stage> {
         }
 
         if (note != null) {
-            texts.add(note("Notes: " + note + "\n"));
+            texts.add(note("Notes: " + note));
         }
 
         if (example != null) {
@@ -202,37 +221,61 @@ public class HelpWindow extends UiPart<Stage> {
 
     private Text title() {
         Text t = new Text("HireME – Command Help\n\n");
-        t.setStyle("-fx-font-size: 30px; -fx-font-weight: bold;");
+        t.setStyle(
+                "-fx-font-size: 28px;"
+                + "-fx-font-weight: bold;"
+                + "-fx-fill: " + PRIMARY + ";"
+        );
         return t;
     }
+
     private Text header(String s) {
         Text t = new Text(s);
-        t.setStyle("-fx-font-size: 20px; -fx-font-weight: bold;");
+        t.setStyle(
+                "-fx-font-size: 18px;"
+                + "-fx-font-weight: bold;"
+                + "-fx-fill: " + PRIMARY + ";"
+        );
         return t;
     }
 
     private Text body(String s) {
-        return new Text(s);
+        Text t = new Text(s);
+        t.setStyle(
+                "-fx-font-size: 14px;"
+                + "-fx-fill: " + TEXT + ";"
+        );
+        return t;
     }
 
     private Text code(String s) {
         Text t = new Text(s);
-        t.setStyle("-fx-font-family: monospace; -fx-fill: #bbbbbb;");
+        t.setStyle(
+                "-fx-font-size: 13px;"
+                + "-fx-font-family: 'Consolas';"
+                + "-fx-fill: #81C784;"
+                + "-fx-background-color: " + CODE_BG + ";"
+        );
         return t;
     }
 
     private Text example(String s) {
         Text t = new Text(s);
-        t.setStyle("-fx-fill: #888888;");
+        t.setStyle(
+                "-fx-font-size: 13px;"
+                + "-fx-fill: " + SUBTLE + ";"
+        );
         return t;
     }
 
     private Text note(String s) {
         Text t = new Text("  " + s + "\n");
-        t.setStyle("-fx-fill: #aaaaaa;");
+        t.setStyle(
+                "-fx-font-size: 13px;"
+                + "-fx-fill: " + MUTED + ";"
+        );
         return t;
     }
-
     /**
      * Shows the help window.
      * @throws IllegalStateException
