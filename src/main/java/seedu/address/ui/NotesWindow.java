@@ -3,6 +3,7 @@ package seedu.address.ui;
 import java.util.function.Consumer;
 import java.util.logging.Logger;
 
+import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -10,6 +11,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import seedu.address.commons.core.LogsCenter;
 
 /**
@@ -94,6 +96,17 @@ public class NotesWindow extends UiPart<Stage> {
     private void handleSave() {
         if (saveCallback != null) {
             saveCallback.accept(notesTextArea.getText());
+
+            saveButton.setText("Saved!");
+            saveButton.setDisable(true);
+
+            PauseTransition pause = new PauseTransition(Duration.seconds(1));
+            pause.setOnFinished(event -> {
+                saveButton.setText("Save");
+                saveButton.setDisable(false);
+            });
+
+            pause.play();
             logger.fine("Notes saved.");
         }
     }
