@@ -19,9 +19,11 @@ public class FindCommand extends Command {
 
     public static final String MESSAGE_USAGE = COMMAND_WORD
             + ": Finds applications using the given fields (prefix + keyword).\n"
-            + "Each prefix(e.g. n/) specifies a field, and keyword is used for filtering (case-insensitive, substring partial match).\n"
+            + "Each prefix(e.g. n/) specifies a field, and keyword is used for filtering "
+            + "(case-insensitive, substring partial match).\n"
             + "At least one field must be provided.\n"
-            + "For optional fields (email, website, address), using an empty keyword (e.g. find e/) matches applications with no value for that field.\n"
+            + "For optional fields (email, website, address),"
+            + " using an empty keyword (e.g. find e/) matches applications with no value for that field.\n"
             + "Format: find [n/NAME] [r/ROLE] [e/EMAIL] [w/WEBSITE] [a/ADDRESS] [d/DATE] [s/STATUS] [t/TAG]\n"
             + "Example: " + COMMAND_WORD + " n/Google r/Backend Developer s/Pending";
 
