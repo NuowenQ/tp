@@ -63,12 +63,13 @@ public class HelpWindow extends UiPart<Stage> {
                 "Add a new application.",
                 "add n/COMPANY_NAME r/ROLE d/DATE s/STATUS [e/EMAIL] [w/WEBSITE] [a/ADDRESS] [t/TAG]...",
                 "Status must be Pending, Offered, or Rejected. Date must be DD-MM-YYYY.",
-                "add n/Google r/Software Engineer d/19-02-2026 s/Pending e/hr@gmail.com"
+                "add n/Google r/Software Engineer d/19-02-2026 s/Pending e/hr@gmail.com t/round1 t/incoming"
         ));
 
         helpMessage.getChildren().addAll(section("edit",
                 "Update an application by its list number.",
-                "edit INDEX [n/COMPANY_NAME] [r/ROLE] [e/EMAIL] [w/WEBSITE] [a/ADDRESS] [d/DATE] [s/STATUS] [t/TAG]...",
+                "edit INDEX [n/COMPANY_NAME] [r/ROLE] [e/EMAIL] [w/WEBSITE] "
+                        + "[a/ADDRESS] [d/DATE] [s/STATUS] [t/TAG]...",
                 "At least one field must be provided.",
                 "edit 1 r/Backend Developer Intern e/johndoe@gmail.com"
         ));
@@ -104,13 +105,8 @@ public class HelpWindow extends UiPart<Stage> {
         helpMessage.getChildren().addAll(section("open",
                 "Open the notes for an application.",
                 "open INDEX [m/CHOICE_OF_EDIT]",
-                "m/ must be true or false. Defaults to false (view only).",
+                "m/true opens edit mode. m/false opens view-only mode. Defaults to false (view only)",
                 "open 1 m/true"
-        ));
-
-        helpMessage.getChildren().addAll(section("summary",
-                "Show a summary of application statistics.",
-                null, null, null
         ));
 
         helpMessage.getChildren().addAll(section("list",
@@ -118,6 +114,11 @@ public class HelpWindow extends UiPart<Stage> {
                 "list [archived]",
                 "Use list archived to show only archived applications.",
                 "list archived"
+        ));
+
+        helpMessage.getChildren().addAll(section("summary",
+                "Show a summary of application statistics.",
+                null, null, null
         ));
 
         helpMessage.getChildren().addAll(section("clear",
