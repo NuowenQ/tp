@@ -175,6 +175,45 @@ Classes used by multiple components are in the `seedu.address.commons` package.
 
 This section describes noteworthy implementation details of features that are currently present in HireME.
 
+### Find feature
+
+The `find` feature filters the displayed application list based on one or more search fields provided by the user.
+
+The sequence diagram below illustrates the interactions when the user executes `find n/google`:
+
+![Interactions Inside the Logic Component for the `find n/google` Command](images/FindSequenceDiagram.png)
+
+As shown in the sequence diagram above, the `find` command works as follows:
+
+1. `LogicManager` receives the user input and calls `AddressBookParser#parseCommand("find n/google")`.
+2. `AddressBookParser` identifies the command word `find` and creates a `FindCommandParser`.
+3. `AddressBookParser` passes the argument string `n/google` to `FindCommandParser#parse(...)`.
+4. `FindCommandParser` parses the supplied prefixed fields and constructs an `ApplicationMatchesPredicate`.
+5. `FindCommandParser` creates and returns a `FindCommand` containing the matching condition.
+6. `LogicManager` executes the `FindCommand`.
+7. `FindCommand` calls `Model#updateFilteredApplicationList(...)` to update the displayed application list.
+8. `FindCommand` then creates and returns a `CommandResult` to `LogicManager`.
+
+Implementation details:
+
+* `FindCommandParser` supports the following prefixes:
+    * `n/` for company name
+    * `r/` for role
+    * `e/` for email
+    * `w/` for website
+    * `a/` for address
+    * `d/` for date
+    * `s/` for status
+    * `t/` for tags
+* At least one supported prefixed field must be provided.
+* `ApplicationMatchesPredicate` checks whether each application matches the user’s search input.
+* Supplied non-tag fields are combined using AND semantics. Hence, an application must satisfy all provided non-tag filters to be shown.
+* Multiple `t/` prefixes are combined using OR semantics. Hence, an application matches as long as at least one of its tags matches one of the supplied tag keywords.
+* Matching is case-insensitive and uses substring matching.
+* For optional fields such as email, website, and address, an empty value such as `e/` matches applications with no value stored for that field.
+* For tags, `t/` matches applications with no tags.
+
+
 ### Archive state and filtered list views
 
 Archive state is stored directly in `Application` as the boolean field `isArchived`.
