@@ -13,17 +13,35 @@ This guide gives a clear overview of HireME's features and how to use them.
 
 ## Table of Contents
 
-1. [Quick Start](#quick-start)
-2. [Features](#features)
-    - [Managing Applications](#managing-applications) — `add` `edit` `delete` `list`
-    - [Searching Applications](#searching-applications) — `find`
-    - [Archiving Applications](#archiving-applications) — `archive` `unarchive`
-    - [Application Notes](#application-notes) — `open`
-    - [General Commands](#general-commands) — `summary` `help` `clear` `exit`
-3. [FAQ](#faq)
-4. [Known Issues](#known-issues)
-5. [Command Summary](#command-summary)
-6. [Glossary](#glossary)
+- <span style="font-size: 1.2em;"><strong><a href="#quick-start">Quick Start</a></strong></span>
+
+- <span style="font-size: 1.2em;"><strong><a href="#features">Features</a></strong></span>
+    - **[Managing](#managing-applications)**
+        - [`add` — Adding an application](#adding-an-application-add)
+        - [`edit` — Editing an application](#editing-an-application-edit)
+        - [`delete` — Deleting an application](#deleting-an-application-delete)
+        - [`list` — Listing all applications](#listing-all-applications-list)
+
+    - **[Searching](#searching-applications)**
+        - [`find` — Locating applications](#locating-applications-find)
+
+    - **[Archiving](#archiving-applications)**
+        - [`archive` — Archiving an application](#archiving-an-application-archive)
+        - [`unarchive` — Unarchiving an application](#unarchiving-an-application-unarchive)
+
+    - **[Notes](#application-notes)**
+        - [`open` — Opening application notes](#opening-application-notes-open)
+
+    - **[General Commands](#general-commands)**
+        - [`summary` — Viewing application summary](#viewing-application-summary-summary)
+        - [`help` — Viewing help](#viewing-help-help)
+        - [`clear` — Clearing all entries](#clearing-all-entries-clear)
+        - [`exit` — Exiting HireME](#exiting-hireme-exit)
+
+- <span style="font-size: 1.2em;"><strong><a href="#faq">FAQ</a></strong></span>
+- <span style="font-size: 1.2em;"><strong><a href="#known-issues">Known Issues</a></strong></span>
+- <span style="font-size: 1.2em;"><strong><a href="#command-summary">Command Summary</a></strong></span>
+- <span style="font-size: 1.2em;"><strong><a href="#glossary">Glossary</a></strong></span>
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -134,6 +152,8 @@ Follow these steps to set up and start using HireME:
 
 > ⚠ **Warning:** Special characters (including emojis and invisible spaces such as zero-width spaces) are allowed, but they may cause parsing issues and should be used with caution.
 
+[Back to Table of Contents](#table-of-contents)
+
 ---
 
 # Managing Applications
@@ -179,9 +199,8 @@ Recording your applications early helps you avoid losing track of follow-ups and
 * `add n/Grab r/Backend Developer Intern e/careers@grab.com w/https://grab.com/careers a/3 Media Close d/01-03-2026 s/Pending t/tech t/startup`
 
   Adds an application with tags for easier filtering later. Note that this `add` command is **not in order**.
-<br><br>
 
-
+[Back to Table of Contents](#table-of-contents)
 
 ---
 ## Editing an application: `edit`
@@ -226,7 +245,8 @@ Update an existing application in HireME. Use this when you need to update detai
 * `edit 3 t/` 
 
   Clears all existing tags from the 3rd application.
-<br><br>
+
+[Back to Table of Contents](#table-of-contents)
 
 ---
 
@@ -258,10 +278,9 @@ Delete an application you no longer need from HireME.
 
   Deletes the 1st application in the results of the `find` command.
 
-<br><br>
+[Back to Table of Contents](#table-of-contents)
 
 ---
-
 
 ## Listing all applications: `list`
 
@@ -421,11 +440,9 @@ Archive an application to remove it from your main list while keeping it availab
 
   Archives the 1st application that has Google in the company name.
 
-<br><br>
+[Back to Table of Contents](#table-of-contents)
 
 ---
-
-
 
 ## Unarchiving an application: `unarchive`
 
@@ -526,7 +543,7 @@ See an overview of your job applications and track your progress at a glance in 
 | Success Rate       | Percentage of decided applications (Offered + Rejected) that resulted in an offer <br/>(Excludes Archived Applications) |
 | Archived           | Number of applications that have been archived                                                                          |
 
-<br><br>
+[Back to Table of Contents](#table-of-contents)
 
 ---
 
@@ -541,9 +558,7 @@ Don't remember a command? No worries — `help` opens a window with a quick refe
 
 ![help message](images/helpMessage.png)
 
-
-
-<br><br>
+[Back to Table of Contents](#table-of-contents)
 
 ---
 ## Clearing all entries: `clear`
@@ -555,7 +570,7 @@ Clears all application entries from HireME. Useful if you want a fresh start (e.
 > ⚠ **Warning:**
 > This action is irreversible. All your application data **including archived applications** will be permanently deleted.
 
-<br><br>
+[Back to Table of Contents](#table-of-contents)
 
 ---
 ## Exiting HireME: `exit`
@@ -563,13 +578,15 @@ Clears all application entries from HireME. Useful if you want a fresh start (e.
 Closes HireME.
 
 #### Format: `exit`
-<br><br>
+
+[Back to Table of Contents](#table-of-contents)
 
 ---
 ## Saving the data
 
 HireME data is saved to your hard disk automatically after any command that changes the data. There is no need to save manually.
-<br><br>
+
+[Back to Table of Contents](#table-of-contents)
 
 ---
 ## Editing the data file
