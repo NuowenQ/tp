@@ -21,6 +21,8 @@ public class HelpWindow extends UiPart<Stage> {
     private static final String SUB_TITLE = "#E6E6E6"; // main text
     private static final String TEXT = "#A0A0A0"; // secondary text
     private static final String CODE = "#2A2A2A"; // code background
+    private static final int HELP_WINDOW_WIDTH = 800;
+    private static final int HELP_WINDOW_HEIGHT = 750;
 
     @FXML
     private TextFlow helpMessage;
@@ -245,10 +247,18 @@ public class HelpWindow extends UiPart<Stage> {
      */
     public void show() {
         logger.fine("Showing help page about the application.");
-        getRoot().setWidth(800);
-        getRoot().setHeight(750);
-        getRoot().show();
-        getRoot().centerOnScreen();
+        Stage stage = getRoot();
+
+        stage.setWidth(HELP_WINDOW_WIDTH);
+        stage.setWidth(HELP_WINDOW_HEIGHT);
+
+        if (!stage.isShowing()) {
+            stage.show();
+        }
+
+        stage.setIconified(false);
+        stage.toFront();
+        stage.requestFocus();
     }
 
     /**
