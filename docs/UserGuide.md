@@ -415,7 +415,7 @@ Archive an application to remove it from your main list while keeping it availab
 > 💡 **Tip:** See [Command Format Notes](#command-format-notes).
 
 <br><br>
-![Archived](images/archived.png)
+![Archived](images/Archived.png)
 <br><br>
 
 | Parameter | Prefix | Required | Constraints                                                          | Result                                          | Example |
