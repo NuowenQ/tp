@@ -9,38 +9,21 @@ title: User guide
 HireME is a Desktop application which allows you to track and manage the information related to internship application.
 This guide gives a clear overview of HireME's features and how to use them.
 
+--------------------------------------------------------------------------------------------------------------------
+
 ## Table of Contents
 
-- <span style="font-size: 1.2em;"><strong><a href="#quick-start">Quick Start</a></strong></span>
-
-- <span style="font-size: 1.2em;"><strong><a href="#features">Features</a></strong></span>
-    - **[Managing](#managing-applications)**
-        - [`add` — Adding an application](#adding-an-application-add)
-        - [`edit` — Editing an application](#editing-an-application-edit)
-        - [`delete` — Deleting an application](#deleting-an-application-delete)
-        - [`list` — Listing all applications](#listing-all-applications-list)
-
-    - **[Searching](#searching-applications)**
-        - [`find` — Locating applications](#locating-applications-find)
-
-    - **[Archiving](#archiving-applications)**
-        - [`archive` — Archiving an application](#archiving-an-application-archive)
-        - [`unarchive` — Unarchiving an application](#unarchiving-an-application-unarchive)
-
-    - **[Notes](#application-notes)**
-        - [`open` — Opening application notes](#opening-application-notes-open)
-
-    - **[General Commands](#general-commands)**
-        - [`summary` — Viewing application summary](#viewing-application-summary-summary)
-        - [`help` — Viewing help](#viewing-help-help)
-        - [`clear` — Clearing all entries](#clearing-all-entries-clear)
-        - [`exit` — Exiting HireME](#exiting-hireme-exit)
-
-
-- <span style="font-size: 1.2em;"><strong><a href="#faq">FAQ</a></strong></span>
-- <span style="font-size: 1.2em;"><strong><a href="#known-issues">Known Issues</a></strong></span>
-- <span style="font-size: 1.2em;"><strong><a href="#command-summary">Command Summary</a></strong></span>
-- <span style="font-size: 1.2em;"><strong><a href="#glossary">Glossary</a></strong></span>
+1. [Quick Start](#quick-start)
+2. [Features](#features)
+    - [Managing Applications](#managing-applications) — `add` `edit` `delete` `list`
+    - [Searching Applications](#searching-applications) — `find`
+    - [Archiving Applications](#archiving-applications) — `archive` `unarchive`
+    - [Application Notes](#application-notes) — `open`
+    - [General Commands](#general-commands) — `summary` `help` `clear` `exit`
+3. [FAQ](#faq)
+4. [Known Issues](#known-issues)
+5. [Command Summary](#command-summary)
+6. [Glossary](#glossary)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -61,7 +44,7 @@ Follow these steps to set up and start using HireME:
      >       `java version "17.x.x"`
      >   <br><br>
      >     
-     >  3. If Java is not installed or the version is not 17, you can follow installation guides [here](https://se-education.org/guides/tutorials/javaInstallation.html).
+     >  2. If Java is not installed or the version is not 17, you can follow installation guides [here](https://se-education.org/guides/tutorials/javaInstallation.html).
      > (Mac, Windows, Linux)
 
     <br><br>
@@ -118,7 +101,7 @@ Follow these steps to set up and start using HireME:
        <br><br>
 7. Refer to the [Features](#features) below for details of each command.
 
-<br><br>
+[Back to Table of Contents](#table-of-contents)
 
 ---
 # Features
@@ -151,8 +134,6 @@ Follow these steps to set up and start using HireME:
 
 > ⚠ **Warning:** Special characters (including emojis and invisible spaces such as zero-width spaces) are allowed, but they may cause parsing issues and should be used with caution.
 
-<br><br>
-
 ---
 
 # Managing Applications
@@ -183,17 +164,19 @@ Recording your applications early helps you avoid losing track of follow-ups and
 > ⚠ **Warning:** Two applications with the same `Company Name` and `Role` are not allowed. (Case-insensitive) 
 > You can reuse either field as long as the other is different.
 
-> ⚠ **Warning:** All tags must be unique (Case-sensitive, e.g. `t/PM` and `t/pm` are treated as different tags to support user-defined meanings), duplicated tags will be truncated to a single tag .
+> ⚠ **Warning:** All tags must be unique (Case-sensitive, e.g. `t/PM` and `t/pm` are treated as different tags to support user-defined meanings), duplicated tags will be truncated to a single tag.
 
 > 💡 **Tip:** An application can have any number of tags (including 0).
 
 
 <br><br>
 #### Valid Examples:
-- `add n/Google r/Software Engineer d/15-03-2026 s/Pending`  
+* `add n/Google r/Software Engineer d/15-03-2026 s/Pending`  
+
   Adds a new application to Google. Note that this `add` command **excluded all optional fields**.
 <br><br>
-- `add n/Grab r/Backend Developer Intern e/careers@grab.com w/https://grab.com/careers a/3 Media Close d/01-03-2026 s/Pending t/tech t/startup`
+
+* `add n/Grab r/Backend Developer Intern e/careers@grab.com w/https://grab.com/careers a/3 Media Close d/01-03-2026 s/Pending t/tech t/startup`
 
   Adds an application with tags for easier filtering later. Note that this `add` command is **not in order**.
 <br><br>
@@ -230,20 +213,19 @@ Update an existing application in HireME. Use this when you need to update detai
 
 <br><br>
 #### Valid Examples:
-*  `edit 1 s/Offered` 
+* `edit 1 s/Offered` 
 
-    Updates the status of the 1st application to `Offered`. Congrats!
-   <br><br>
+  Updates the status of the 1st application to `Offered`. Congrats!
+  <br><br>
 
-*  `edit 2 r/Backend Developer Intern e/johndoe@example.com` 
+* `edit 2 r/Backend Developer Intern e/johndoe@example.com` 
 
-   Edits the role and email of the 2nd application.
-   <br><br>
+  Edits the role and email of the 2nd application.
+  <br><br>
 
-*  `edit 3 t/` 
+* `edit 3 t/` 
 
-   Clears all existing tags from the 3rd application.
-
+  Clears all existing tags from the 3rd application.
 <br><br>
 
 ---
@@ -269,12 +251,12 @@ Delete an application you no longer need from HireME.
 #### Valid Examples:
 * `list` followed by `delete 2` 
 
-Deletes the 2nd application in the list.
-<br><br>
+  Deletes the 2nd application in the list.
+  <br><br>
 
 * `find n/Google` followed by `delete 1` 
 
-Deletes the 1st application in the results of the `find` command.
+  Deletes the 1st application in the results of the `find` command.
 
 <br><br>
 
@@ -296,9 +278,8 @@ View active or archived applications currently stored in HireME.
 | archived  | —      | Optional | Shows all **archived** applications            | `list archived` |
 
 > 💡 **Tip:** The displayed list affects all commands that use `INDEX`.
->
 
-<br><br>
+[Back to Table of Contents](#table-of-contents)
 
 ---
 # Searching Applications
@@ -354,7 +335,7 @@ Search for applications by entering keywords (e.g. company, role, or status) to 
 > ⚠  **Warning:** If the same prefix (except `t/`) is used multiple times in `find`, only the last value will be used.
 See [Troubleshooting – Find](#troubleshooting---find).
 
- <br><br>
+<br><br>
 #### Valid Examples:
 * `find n/google`
 
@@ -387,7 +368,7 @@ An example of a filtered list is shown below:
 
 <br>
 
- Applications with roles matching "Software" is listed.
+Applications with roles matching "Software" is listed.
 
 ![Applications with roles matching `Software` are shown below.](images/FindResult.png)
 
@@ -402,7 +383,7 @@ An example of a filtered list is shown below:
 
 > 💡 **Tip:** For the Repeated prefix scenario, this issue does **not** apply to the tag prefix `t/`. See [Special search behaviours, Multiple tags](#special-search-behaviours)
 
-<br><br>
+[Back to Table of Contents](#table-of-contents)
 
 ---
 
@@ -430,7 +411,6 @@ Archive an application to remove it from your main list while keeping it availab
 > 💡 **Tip:** You can view archived applications using the [`list archived` command](#listing-all-applications-list).
 
 <br><br>
-
 
 #### Valid Examples:
 * `archive 2` 
@@ -469,14 +449,14 @@ Move an archived application back to your main list so you can continue tracking
 
   Restores the 2nd archived application.
 
-<br><br>
+[Back to Table of Contents](#table-of-contents)
 
 ---
 
 # Application Notes
 ## Opening application notes: `open`
 
-Open or update an application's notes to review  important details from your application process.
+Open or update an application's notes to review important details from your application process.
 
 #### Format: `open INDEX [m/CHOICE_OF_EDIT]`
 > 💡 **Tip:** See [Command Format Notes](#command-format-notes).
@@ -518,7 +498,7 @@ The **_'Save'_** button will indicate a warning notification that the notes wind
 
 ![Notes Save Failed](images/Notes_savefailed.png)
 
-<br><br>
+[Back to Table of Contents](#table-of-contents)
 
 ---
 # General Commands
@@ -553,8 +533,9 @@ See an overview of your job applications and track your progress at a glance in 
 ## Viewing help: `help`
 
 Don't remember a command? No worries — `help` opens a window with a quick reference of all available commands and their formats.
+
 #### Format: `help`
-> 💡 Tip: You can also open the same help window from the `Help` menu or with the keyboard shortcut `F1`.
+> 💡 **Tip:** You can also open the same help window from the `Help` menu or with the keyboard shortcut `F1`.
 
 <br><br>
 
@@ -598,23 +579,23 @@ HireME data is saved automatically as a JSON file `[JAR file location]/data/Hire
 > ⚠ **Warning:**
 > If your changes to the data file make its format invalid, HireME will discard all data and start with an empty data file at the next run. It is recommended to take a backup of the file before editing it. Furthermore, certain edits can cause HireME to behave in unexpected ways (e.g., if a value entered is outside the acceptable range). Only edit the data file if you are confident you can update it correctly.
 
-<br><br>
+[Back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
 ## FAQ
 
-**Q: How do I transfer my data to another Computer?<br>**
-**A**: Install HireME on the other computer and overwrite the empty data file it creates with the file that contains the data from your previous HireME home folder.
+**Q: How do I transfer my data to another Computer?**  
+**A:** Install HireME on the other computer and overwrite the empty data file it creates with the file that contains the data from your previous HireME home folder.
 
-**Q: Can I add two applications to the same company?<br>**
-**A**: Yes, as long as the **role** and/or **company name** is different. They are case-insensitive so `Grab` and `grab` are considered the same company name. HireME identifies duplicates by the combination of company name and role.
+**Q: Can I add two applications to the same company?**  
+**A:** Yes, as long as the **role** and/or **company name** is different. They are case-insensitive so `Grab` and `grab` are considered the same company name. HireME identifies duplicates by the combination of company name and role.
 
-**Q: Is the email field mandatory?<br>**
-**A**: No, email is optional. You can always add it later with the `edit` command.
+**Q: Is the email field mandatory?**  
+**A:** No, email is optional. You can always add it later with the `edit` command.
 
-**Q: What statuses can I use?<br>**
-**A**: The three supported statuses are `Offered`, `Pending`, and `Rejected`. They are case-insensitive, so `pending`, `PENDING`, and `Pending` all work.
+**Q: What statuses can I use?**  
+**A:** The three supported statuses are `Offered`, `Pending`, and `Rejected`. They are case-insensitive, so `pending`, `PENDING`, and `Pending` all work.
 
 **Q: Why does my `find` command not return expected results?**  
 **A:** Ensure that:
@@ -640,7 +621,7 @@ Example: `find n/Grab n/Google` searches only for `Google`.
 **Q: Can I edit multiple fields at once?**  
 **A:** Yes. You can include multiple prefixes in a single `edit` command to update several fields at once.
 
-<br><br>
+[Back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -650,7 +631,7 @@ Example: `find n/Grab n/Google` searches only for `Google`.
 2. **If you minimize the Help Window** and then run the `help` command (or use the `Help` menu, or the keyboard shortcut `F1`) again, the original Help Window will remain minimized, and no new Help Window will appear. The remedy is to manually restore the minimized Help Window.
 3. **If you use the same prefix multiple times** in the `find` command (e.g. `n/Grab n/Google`), only the last value is used. The remedy is to use different prefixes or run separate searches instead.
 
-<br><br>
+[Back to Table of Contents](#table-of-contents)
 
 --------------------------------------------------------------------------------------------------------------------
 
@@ -659,10 +640,10 @@ Example: `find n/Grab n/Google` searches only for `Google`.
 | Action                                                 | Format                                                                                  | Example                                                                                                          |
 |--------------------------------------------------------|-----------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------|
 | [**Add**](#adding-an-application-add)                  | `add n/COMPANY_NAME r/ROLE d/DATE s/STATUS [e/EMAIL] [w/WEBSITE] [a/ADDRESS] [t/TAG]…​` | `add n/Google r/Software Engineer d/15-03-2026 s/Pending w/https://careers.google.com a/70 Pasir Panjang Rd` |
-| [**Edit***](#editing-an-application-edit)              | `edit INDEX FIELD [FIELD]…​`                                                            | `edit 1 s/Offered`                                                                                               |
+| [**Edit**](#editing-an-application-edit)              | `edit INDEX FIELD [FIELD]…​`                                                            | `edit 1 s/Offered`                                                                                               |
 | [**Delete**](#deleting-an-application-delete)          | `delete INDEX`                                                                          | `delete 3`                                                                                                       |
 | [**List**](#listing-all-applications-list)             | `list [archived]`                                                                       | —                                                                                                                |
-| [**Find***](#locating-applications-find)               | `find FIELD [FIELD]…​`                                                                  | `find n/Google`                                                                                                  |
+| [**Find**](#locating-applications-find)               | `find FIELD [FIELD]…​`                                                                  | `find n/Google`                                                                                                  |
 | [**Archive**](#archiving-an-application-archive)       | `archive INDEX`                                                                         | `archive 2`                                                                                                      |
 | [**Unarchive**](#unarchiving-an-application-unarchive) | `unarchive INDEX`                                                                       | `unarchive 1`                                                                                                    |
 | [**Open**](#opening-application-notes-open)            | `open INDEX [m/CHOICE_OF_EDIT]`                                                         | `open 1 m/True`                                                                                                  |
@@ -673,10 +654,11 @@ Example: `find n/Grab n/Google` searches only for `Google`.
 
 > ⚠ **Warning:** At least **ONE** optional field is required for the `edit` command. At least **ONE** search field is required for the `find` command.
 
+[Back to Table of Contents](#table-of-contents)
+
 --------------------------------------------------------------------------------------------------------------------
 
 ## Glossary
-[Back to Table of Contents](#table-of-contents)
 
 ### Application Status
 The current stage of an application (`Pending`, `Rejected`, or `Offered`).
@@ -707,5 +689,4 @@ For example, in `n/Google`, `Google` is the keyword.
 ### Prefix
 A short label (e.g. `n/`, `r/`, `t/`) used to indicate the type of information being entered.
 
-### Tag
-A label used to organise applications (e.g. `remote`, `tech`, `archived`).
+[Back to Table of Contents](#table-of-contents)
