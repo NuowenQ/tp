@@ -86,7 +86,7 @@ Follow these steps to set up and start using HireME:
    > <br><br>
    > 3. To launch HireME, run the following command:
    > <br><br>
-   >    `java -jar hireME.jar`
+   >    `java -jar HireME.jar`
 
      <br><br>
 5.  A [GUI](#gui) similar to the below should appear in a few seconds. Note how the app contains some sample data.
