@@ -670,15 +670,15 @@ Use case ends.
 ## Non-Functional Requirements (NFRs)
 
 ### Usability
-- A user who is comfortable with CLI should be able to complete core tasks (add, delete, edit, list) faster than using a mouse driven GUI.
-- A new user should be able to learn the basic commands within 10 minutes using only the help command.
+- A user familiar with CLI applications should be able to complete core tasks using keyboard-only input after reading the help feature and User Guide.
+- The help feature and User Guide should provide sufficient examples for a new user to perform core commands without external assistance.
 - Command formats shall follow a consistent prefix-based structure (e.g., n/, r/, s/) to ensure predictability.
-- The system shall provide clear and specific error messages for invalid commands or parameters.
+- The system should provide error messages that identify invalid commands or parameters and state the expected input format.
 - Core tasks should be executable without requiring mouse interaction.
 
 ### Reliability
 - Application data should be saved automatically after commands that modify stored data.
-- Invalid user input should not cause the application to crash.
+- The system should not terminate unexpectedly during normal use.
 
 ### Portability
 - The application should work on Windows, macOS, and Linux with Java 17 or above installed.
@@ -686,18 +686,16 @@ Use case ends.
 - The application should not depend on external services for core functionality.
 
 ### Maintainability
-- The codebase should conform to SE-EDU Java coding standards, with no major style violations in the main codebase 
-  before each release.
-- A developer who has completed the setup steps in this guide should be able to locate the main logic, model, storage,
-  and UI packages by using the architecture and component diagrams in this guide.
-- Each major feature shall have a User Guide section that states its command format, parameters, constraints, and at
-  least one valid example.
-- Each feature described in the Developer Guide's Implementation section shall identify the main implementation classes
-  and explain the normal execution flow.
+- The codebase should conform to SE-EDU Java coding standards, with no major style violations in the main codebase.
+- A new command should be implementable by modifying no more than three existing classes, excluding test files.
+- Core components (UI, Logic, Model, Storage) should interact only through their defined interfaces.
 
 ### Data Integrity
-- The application should validate all user inputs and reject invalid data with clear error messages without crashing.
+- Invalid commands or inputs should not modify existing stored application data.
+- The application should reject invalid input without corrupting or losing existing stored data.
 
+### Performance
+- The application should respond to user commands within 2 seconds for datasets of up to 500 applications.
 
 ---
 
