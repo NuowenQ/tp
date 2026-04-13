@@ -21,11 +21,12 @@ title: Developer Guide
     * [Archive state and filtered list views](#archive-state-and-filtered-list-views)
         * [Design considerations](#design-considerations)
     * [Notes window flow](#notes-window-flow)
+        * [Design considerations](#design-considerations-1)
     * [Summary window flow](#summary-window-flow)
     * [UI action dispatch](#ui-action-dispatch)
     * [[Proposed] Undo/redo feature](#proposed-undoredo-feature)
         * [Proposed Implementation](#proposed-implementation)
-        * [Design considerations](#design-considerations-1)
+        * [Design considerations](#design-considerations-2)
 * [Documentation, logging, testing, configuration, dev-ops](#documentation-logging-testing-configuration-dev-ops)
 * [Appendix: Requirements](#appendix-requirements)
     * [Product scope](#product-scope)
@@ -304,6 +305,18 @@ When the user saves notes from the notes window:
 
 This design keeps the note editor out of the command parser while still preserving a single source of truth for
 application data in the model.
+
+#### Design considerations
+
+**Aspect: How to store application notes:**
+
+* **Alternative 1 (current choice):** Store notes as a String field inside `Application`.
+  * Pros: Notes are saved and serialized together with the application. No extra files or classes to manage.
+  * Cons: Editing notes requires creating a new replacement `Application` object due to immutability.
+
+* **Alternative 2:** Store notes in a separate file per application.
+  * Pros: Notes can be edited independently without touching the application object.
+  * Cons: Requires managing file creation, deletion, and linking between files and applications. Risk of orphaned files if an application is deleted without cleaning up its notes file.
 
 ### Summary window flow
 
