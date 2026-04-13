@@ -620,7 +620,7 @@ HireME data is saved automatically as a JSON file `[JAR file location]/data/Hire
 **A:** Ensure that:
 - you are using prefixes (e.g. `n/Google`)
 - the spelling matches
-- you are not missing prefixes (text without prefixes is ignored)
+- you are not missing prefixes
 
 **Q: Why does only one value get used when I repeat a prefix in `find`?**  
 **A:** If the same prefix is used multiple times, only the **last value** is applied.  
