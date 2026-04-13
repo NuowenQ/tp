@@ -326,6 +326,7 @@ coupling them directly to JavaFX classes such as `Stage`.
 Undo/redo is not implemented in the current codebase yet, but it remains a possible future enhancement.
 The following design is therefore a proposal rather than a description of existing behavior.
 
+The proposal uses HireME naming for proposed classes and methods, existing class names such as `AddressBook` are retained where they reference current code.
 #### Proposed Implementation
 
 The proposed undo/redo mechanism is facilitated by `VersionedHireME`. It extends `AddressBook` with an undo/redo
