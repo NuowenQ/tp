@@ -635,16 +635,24 @@ Use case ends.
 **Precondition**: At least one application is shown in the current list
 
 **Main Success Scenario**:
-1. User enters open command to open an application's notes by index.
-2. HireME identifies the selected application.
-3. HireME opens the notes window in view mode or edit mode, depending on the command.
-4. User reads or edits the notes.
+1. User requests to open notes for a specific application in edit mode.
+2. HireME shows the application's notes for editing.
+3. User modifies the notes.
+4. User saves the notes.
+5. HireME confirms the notes are saved.
 
 Use case ends.
 
 **Extensions**:
-* 1a. The given index is invalid.
+* 1a. User requests for an application that doesn't exist.
     * 1a1. HireME shows an error message.
+    * Use case ends.
+* 1b. User requests to open notes for a specific application in view mode.
+    * 1b1. HireME displays the application's notes in read-only state.
+    * 1b2. User reads the notes recorded.
+    * Use case ends.
+* 4a. User closes the notes without saving.
+    * 4a1. HireME discards the unsaved changes.
     * Use case ends.
 
 
